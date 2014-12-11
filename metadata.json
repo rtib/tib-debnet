@@ -1,0 +1,22 @@
+{
+  "author": "tib",
+  "dependencies": [
+  	{"name":"puppetlabs/concat","version_requirement":"1.1.x"}
+  ],
+  "license": "Apache Version 2.0",
+  "name": "tib-debnet",
+  "operatingsystem_support": [],
+  "project_page": "https://github.com/rtib/tib-debnet.git",
+  "requirements": [
+  	{
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "source": "https://github.com/rtib/tib-debnet.git",
+  "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
+  "tags": [
+  	"Debian", "Ubuntu", "network", "interfaces"
+  ],
+  "version": "0.1.0"
+}
