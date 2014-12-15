@@ -3,6 +3,8 @@
 	<name>debnet</name>
 	<comment></comment>
 	<projects>
+		<project>concat</project>
+		<project>stdlib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
