@@ -1,0 +1,6 @@
+# interface <%= @ifname -%> configuration
+<% if @auto -%>
+auto <%= @ifname %>
+<% else -%>
+allow-hotplug <%= @ifname %>
+<% end -%>

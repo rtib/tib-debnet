@@ -1,9 +1,3 @@
-# interface <%= @ifname -%> configuration
-<% if @auto -%>
-auto <%= @ifname %>
-<% else -%>
-allow-hotplug <%= @ifname %>
-<% end -%>
 iface <%= @ifname -%> <%= @family -%> dhcp
 <% if @hostname -%>
   hostname <%= @hostname %>s

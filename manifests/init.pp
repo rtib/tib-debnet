@@ -18,7 +18,7 @@ class debnet inherits debnet::params {
     ensure_newline => true,
   }
   
-  concat::fragment { "$interfaces_file header":
+  concat::fragment { "interfaces_header":
     target  => $interfaces_file,
     content => template('debnet/header.erb'),
     order   => 01,

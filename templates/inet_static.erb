@@ -1,9 +1,3 @@
-# interface <%= @ifname -%> configuration
-<% if @auto -%>
-auto <%= @ifname %>
-<% else -%>
-allow-hotplug <%= @ifname %>
-<% end -%>
 iface <%= @ifname -%> inet static
   address <%= @address %>
   netmask <%= @netmask %>
@@ -25,4 +19,3 @@ iface <%= @ifname -%> inet static
 <% if @mtu -%>
   mtu <%= @mtu %>
 <% end -%>
-  

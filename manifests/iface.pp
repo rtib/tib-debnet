@@ -36,7 +36,7 @@ define debnet::iface (
   
   case $method {
     'loopback' : { 
-      concat::fragment { "iface lo stanza":
+      concat::fragment { "lo_stanza":
         target  => $debnet::params::interfaces_file,
         content => template('debnet/loopback.erb'),
         order   => 10 + $order,
@@ -52,9 +52,9 @@ define debnet::iface (
       if $client { validate_string($client) }
       if $hwaddress { validate_re($hwaddress, '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') }
       
-      concat::fragment { "iface $ifname stanza":
+      concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
-        content => template('debnet/dhcp.erb'),
+        content => template('debnet/iface_header.erb', 'debnet/inet_dhcp.erb'),
         order   => 20 + $order,
       }
     }
@@ -70,9 +70,9 @@ define debnet::iface (
 		  if $mtu { validate_re($mtu, '^\d+$') }
 		  if $scope { validate_re($scope, '^global$|^link$|^host$') }
 
-      concat::fragment { "iface $ifname stanza":
+      concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
-        content => template('debnet/static.erb'),
+        content => template('debnet/iface_header.erb', 'debnet/inet_static.erb'),
         order   => 20 + $order,
       }
     }
