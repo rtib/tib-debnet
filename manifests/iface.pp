@@ -26,13 +26,14 @@ define debnet::iface (
   $scope = undef,
   
 ) {
+  validate_string($ifname)
   validate_bool($auto)
   validate_bool($hotplug)
   if $auto and $hotplug {
     notice("Configuring interface $ifname auto and hotplug make no sense.")
   }
-  validate_re( $family, '^inet$' )
-  validate_re( $method, '^loopback$|^dhcp$|^static$')
+  validate_re($family, '^inet$' )
+  validate_re($method, '^loopback$|^dhcp$|^static$')
   
   case $method {
     'loopback' : { 
