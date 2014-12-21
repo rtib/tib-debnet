@@ -1,6 +1,7 @@
 # interface <%= @ifname -%> configuration
 <% if @auto -%>
 auto <%= @ifname %>
-<% else -%>
-allow-hotplug <%= @ifname %>
+<% end -%>
+<% @allows.each do |s| -%>
+allow-<%= s -%> <%= @ifname %>
 <% end -%>

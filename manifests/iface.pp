@@ -1,7 +1,7 @@
 define debnet::iface (
   $ifname = $title,
   $auto = true,
-  $hotplug = false,
+  $allows = [],
   $family = 'inet',
   $method,
   $order = 0,
@@ -28,10 +28,7 @@ define debnet::iface (
 ) {
   validate_string($ifname)
   validate_bool($auto)
-  validate_bool($hotplug)
-  if $auto and $hotplug {
-    notice("Configuring interface $ifname auto and hotplug make no sense.")
-  }
+  validate_array(allows)
   validate_re($family, '^inet$' )
   validate_re($method, '^loopback$|^dhcp$|^static$')
   
