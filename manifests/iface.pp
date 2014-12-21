@@ -28,7 +28,7 @@ define debnet::iface (
 ) {
   validate_string($ifname)
   validate_bool($auto)
-  validate_array(allows)
+  validate_array($allows)
   validate_re($family, '^inet$' )
   validate_re($method, '^loopback$|^dhcp$|^static$')
   
