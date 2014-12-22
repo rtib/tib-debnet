@@ -74,6 +74,8 @@ define debnet::iface (
         order   => 20 + $order,
       }
     }
-
+    default: {
+      err("unrecognized method")
+    }
   }
 }
