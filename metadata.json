@@ -1,5 +1,5 @@
 {
-  "author": "tib",
+  "author": "trepasi",
   "dependencies": [
   	{"name":"puppetlabs/concat","version_requirement":"1.1.x"},
   	{"name":"puppetlabs/stdlib","version_requirement":"4.3.x"}
