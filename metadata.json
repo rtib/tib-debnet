@@ -4,7 +4,8 @@
   	{"name":"puppetlabs/concat","version_requirement":"1.1.x"},
   	{"name":"puppetlabs/stdlib","version_requirement":"4.3.x"}
   ],
-  "license": "Apache Version 2.0",
+  "issues_url":"https://github.com/rtib/tib-debnet/issues",
+  "license": "Apache-2.0",
   "name": "trepasi-debnet",
   "operatingsystem_support": [
   	{
@@ -24,7 +25,7 @@
   "source": "https://github.com/rtib/tib-debnet.git",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
   "tags": [
-  	"Debian", "Ubuntu", "network", "interfaces"
+  	"debian","ubuntu","network","interfaces"
   ],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
