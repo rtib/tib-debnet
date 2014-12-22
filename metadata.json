@@ -6,7 +6,14 @@
   ],
   "license": "Apache Version 2.0",
   "name": "tib-debnet",
-  "operatingsystem_support": [],
+  "operatingsystem_support": [
+  	{
+  		"operatingsystem": "Debian",
+  		"operatingsystemrelease": [
+  			"7"
+  		]
+  	}
+  ],
   "project_page": "https://github.com/rtib/tib-debnet.git",
   "requirements": [
   	{
