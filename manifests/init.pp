@@ -1,25 +1,49 @@
-# Class: debnet
+# == Class: debnet
 #
-# This module manages debnet
+# Initial class of module.
 #
-# Parameters: none
+# === Parameters
 #
-# Actions:
+# none
 #
-# Requires: see Modulefile
+# === Variables
 #
-# Sample Usage:
+# none
 #
-class debnet inherits debnet::params {
-  concat { "$interfaces_file" :
+# === Examples
+#
+# include debnet
+#
+# === Authors
+#
+# Tibor Repasi
+#
+# === Copyright
+#
+# Copyright 2014 Tibor Repasi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+class debnet {
+  concat { $debnet::params::interfaces_file :
     owner          => 'root',
     group          => 'root',
     mode           => '0644',
     ensure_newline => true,
   }
   
-  concat::fragment { "interfaces_header":
-    target  => $interfaces_file,
+  concat::fragment { 'interfaces_header':
+    target  => $debnet::params::interfaces_file,
     content => template('debnet/header.erb'),
     order   => 01,
   }
