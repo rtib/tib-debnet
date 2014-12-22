@@ -86,6 +86,69 @@ debnet::iface::dhcp { 'eth0': }
 
 ###Defines
 
+####debnet::iface::loopback
+Creates an interfaces(5) stanza to configure the loopback device.
+
+#####`title` - string
+Must be 'lo'.
+
+####debnet::iface::dhcp
+Creates an interfaces(5) stanza to configure a simple device with dhcp.
+
+#####`title` - string
+Name of the interface to be configured
+
+#####`metric` - int
+Routing metric for routes comming with this interface.
+
+#####`hostname` - string
+The hostname to be submitted with dhcp requests.
+
+#####`leasetime` - int
+The requested leasetime of dhcp leases.
+
+#####`vendor` - string
+The vendor id to be submitted with dhcp requests.
+
+#####`client` - string
+The client id to be submitted with dhcp requests.
+
+####debnet::iface::static
+Creates an interfaces(5) stanza to configure a simple device with static
+settings.
+
+#####`title` - string
+The name of the interface to be configured.
+
+#####`hwaddress` - string
+The MAC address of the interface. This value is validated as standard IEEE
+MAC address of 6 bytes, written hexadecimal, delimited with colons (:) or
+dashes (-).
+
+#####`metric` - int
+Routing metric for routes added resolved on this interface.
+
+#####`address` - string
+IP address formatted as dotted-quad for IPv4.
+
+#####`netmask` - string
+Netmask as dotted-quad or CIDR prefix length.
+
+#####`broadcast` - string
+Broadcast address as dotted-quad or + or -.
+
+#####`gateway` - string
+Default route to be brought up with this interface.
+
+#####`pointopoint` - string
+Address of the ppp endpoint as dotted-quad.
+
+#####`mtu` - int
+Size of the maximum transportable unit over this interface.
+
+#####`scope` - string
+Scope of address validity. Values allowed are global, link or host.
+
 ####debnet::iface
 
 #####`title` - string
@@ -153,7 +216,4 @@ Size of the maximum transportable unit over this interface.
 
 #####`scope` - string
 Scope of address validity. Values allowed are global, link or host.
-
-
-
 
