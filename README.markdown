@@ -4,6 +4,13 @@
 
 1. [Overview](#overview)
 2. [Module Description - What the module does](#module-description)
+3. [Setup - Basic usage of module debnet](#setup)
+    * [Beginning with the module](#beginning)
+    * [Available configuration methods](#config-available)
+    * [Configuring the loopback interface](#loopback-config)
+    * [Static IPv4 configuration](#static-config)
+    * [DHCP configuration](#dhcp-config)
+4. [Reference](#reference)
 
 ##Overview
 
