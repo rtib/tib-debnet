@@ -1,11 +1,11 @@
 {
-  "author": "trepasi",
+  "author": "T. Repasi",
   "dependencies": [
   	{"name":"puppetlabs/concat","version_requirement":"1.1.x"},
   	{"name":"puppetlabs/stdlib","version_requirement":"4.3.x"}
   ],
   "license": "Apache Version 2.0",
-  "name": "tib-debnet",
+  "name": "trepasi-debnet",
   "operatingsystem_support": [
   	{
   		"operatingsystem": "Debian",
