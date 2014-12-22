@@ -1,9 +1,9 @@
 define debnet::iface (
+  $method,
   $ifname = $title,
   $auto = true,
   $allows = [],
   $family = 'inet',
-  $method,
   $order = 0,
 
   # options for multiple methods  
