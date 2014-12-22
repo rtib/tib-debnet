@@ -51,9 +51,7 @@ Currently there is on a single way to create a configuration on the
 loopback interface.
 
 ```puppet
-debnet::iface { 'lo':
-  method => 'loopback',
-}
+debnet::iface::loopback { 'lo': }
 ```
 
 ###Static IPv4 configuration
@@ -62,8 +60,7 @@ mandatory. Attributes broadcast, gateway, pointopoint, hwaddress, mtu and
 scope are optional.
 
 ```puppet
-debnet::iface { 'eth0':
-  method  => 'static',
+debnet::iface::static { 'eth0':
   address => '192.168.0.10',
   netmask => '24',
   gateway => '192.168.0.1',
@@ -76,9 +73,7 @@ according. Optional attributes hostname, metric, leasetime, vendor, client
 and hwaddress may be set.
 
 ```puppet
-debnet::iface { 'eth0':
-  method => 'dhcp', 
-}
+debnet::iface::dhcp { 'eth0': }
 ```
 ##Reference
 

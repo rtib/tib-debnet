@@ -1,4 +1,4 @@
-# == Class: debnet
+# == Class: params
 #
 # Parameter settings.
 #

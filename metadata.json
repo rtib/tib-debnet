@@ -8,24 +8,24 @@
   "license": "Apache-2.0",
   "name": "trepasi-debnet",
   "operatingsystem_support": [
-  	{
-  		"operatingsystem": "Debian",
-  		"operatingsystemrelease": [
-  			"7"
-  		]
-  	}
-  ],
-  "project_page": "https://github.com/rtib/tib-debnet.git",
-  "requirements": [
-  	{
-      "name": "puppet",
-      "version_requirement": "3.x"
+    {
+        "operatingsystem": "Debian",
+        "operatingsystemrelease": [
+            "7"
+        ]
+    },
+    {
+        "operatingsystem": "Ubuntu",
+        "operatingsystemrelease": [
+            "14.04"
+        ]
     }
   ],
+  "project_page": "https://github.com/rtib/tib-debnet.git",
   "source": "https://github.com/rtib/tib-debnet.git",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
   "tags": [
-  	"debian","ubuntu","network","interfaces"
+  	"debian","network","interfaces","ifup","ifdown"
   ],
-  "version": "0.1.1"
+  "version": "0.2.0"
 }

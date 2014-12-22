@@ -5,9 +5,7 @@
 # == Parameters
 #
 # [*ifname*] => *(namevar)* - string
-#   Configuration method to be used. Currently supported methods are:
-#     * static
-#     * dhcp
+#   Name of the interface to be configured.
 #
 # [*method*] - string
 #   Configuration method to be used.

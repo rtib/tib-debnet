@@ -35,7 +35,9 @@
 # limitations under the License.
 #
 class debnet {
-  concat { $debnet::params::interfaces_file :
+  include debnet::params
+
+  concat { $params::interfaces_file :
     owner          => 'root',
     group          => 'root',
     mode           => '0644',
@@ -43,7 +45,7 @@ class debnet {
   }
   
   concat::fragment { 'interfaces_header':
-    target  => $debnet::params::interfaces_file,
+    target  => $params::interfaces_file,
     content => template('debnet/header.erb'),
     order   => 01,
   }
