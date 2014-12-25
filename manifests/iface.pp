@@ -8,7 +8,11 @@
 #   Name of the interface to be configured.
 #
 # [*method*] - string
-#   Configuration method to be used.
+#   Configuration method to be used. Supported methods are:
+#   * loopback
+#   * dhcp
+#   * static
+#   * manual
 #
 # [*auto*] - bool
 #   Sets the interface on automatic setup on startup. This is affected by
@@ -144,7 +148,7 @@ define debnet::iface (
   validate_bool($auto)
   validate_array($allows)
   validate_re($family, '^inet$' )
-  validate_re($method, '^loopback$|^dhcp$|^static$')
+  validate_re($method, '^loopback$|^dhcp$|^static$|^manual$')
   validate_hash($aux_ops)
   validate_array($pre_ups)
   validate_array($ups)
@@ -205,6 +209,16 @@ define debnet::iface (
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_static.erb',
+          'debnet/iface_aux.erb'),
+        order   => 20 + $order,
+      }
+    }
+    'manual' : {
+      concat::fragment { "${ifname}_stanza":
+        target  => $debnet::params::interfaces_file,
+        content => template(
+          'debnet/iface_header.erb',
+          'debnet/inet_manual.erb',
           'debnet/iface_aux.erb'),
         order   => 20 + $order,
       }

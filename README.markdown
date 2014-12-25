@@ -45,6 +45,7 @@ are:
 * loopback
 * static
 * dhcp
+* manual
 
 ###Configuring the loopback interface
 Currently there is on a single way to create a configuration on the
