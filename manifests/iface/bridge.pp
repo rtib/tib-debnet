@@ -69,6 +69,21 @@
 # [*scope*] - string
 #  Scope of address validity. Values allowed are global, link or host.
 #
+# [*ports*] - array
+#  Array of ports to be added to the bridge.
+#
+# [*stp*] - bool
+#  Sets if bridge should implement spanning tree protocol.
+#
+# [*prio*] - int
+#  Priority of the bridge for root selection within spanning tree.
+#
+# [*fwdelay*] - int
+#  Sets the forward delay of the bridge in seconds.
+#
+# [*hello*] - int
+#  Sets the bridge hello time in seconds.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -132,6 +147,9 @@ define debnet::iface::bridge(
   
   if size($ports) > 0 {
     $brports = join($ports, " ")
+    debnet::iface { $ports:
+      method => 'manual',
+    }
   } else {
     $brports = 'none'
   }
