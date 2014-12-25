@@ -68,6 +68,22 @@
 # [*scope*] - string
 #  Scope of address validity. Values allowed are global, link or host.
 #
+# [*pre_ups*] - array
+#  Array of commands to be run prior to bringing this interface up.
+#
+# [*ups*] - array
+#  Array of commands to be run after bringing this interface up.
+#  
+# [*downs*] - array
+#  Array of commands to be run prior to bringing this interface down.
+#
+# [*post_downs*] - array
+#  Array of commands to be run after bringing this interface down.
+#
+# [*aux_ops*] - hash
+#  Hash of key-value pairs with auxiliary options for this interface.
+#  To be used by other debnet types only.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -96,7 +112,7 @@ define debnet::iface (
   $family = 'inet',
   $order = 0,
 
-  # options for multiple methods  
+  # options for multiple methods
   $metric = undef,
   $hwaddress = undef,
 
@@ -114,13 +130,26 @@ define debnet::iface (
   $pointopoint = undef,
   $mtu = undef,
   $scope = undef,
-  
+
+  # up and down commands
+  $pre_ups = [],
+  $ups = [],
+  $downs = [],
+  $post_downs = [],
+
+  # auxiliary options
+  $aux_ops = {},
 ) {
   validate_string($ifname)
   validate_bool($auto)
   validate_array($allows)
   validate_re($family, '^inet$' )
   validate_re($method, '^loopback$|^dhcp$|^static$')
+  validate_hash($aux_ops)
+  validate_array($pre_ups)
+  validate_array($ups)
+  validate_array($downs)
+  validate_array($post_downs)
   
   case $method {
     'loopback' : {
@@ -132,7 +161,9 @@ define debnet::iface (
     }
     
     'dhcp' : {
-      package { 'isc-dhcp-client': ensure => 'installed', }
+      if !defined(Package['isc-dhcp-client']) {
+        package { 'isc-dhcp-client': ensure => 'installed', }
+      }
       if $hostname { validate_re($hostname,
         '^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$') }
       if $metric { validate_re($metric, '^\d+$') }
@@ -144,7 +175,10 @@ define debnet::iface (
       
       concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
-        content => template('debnet/iface_header.erb', 'debnet/inet_dhcp.erb'),
+        content => template(
+          'debnet/iface_header.erb',
+          'debnet/inet_dhcp.erb',
+          'debnet/iface_aux.erb'),
         order   => 20 + $order,
       }
     }
@@ -168,7 +202,10 @@ define debnet::iface (
 
       concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
-        content => template('debnet/iface_header.erb', 'debnet/inet_static.erb'),
+        content => template(
+          'debnet/iface_header.erb',
+          'debnet/inet_static.erb',
+          'debnet/iface_aux.erb'),
         order   => 20 + $order,
       }
     }

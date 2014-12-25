@@ -1,0 +1,15 @@
+<% @aux_ops.keys.sort.each do |k| -%>
+  <%= k -%> <%= @aux_ops[k] %>
+<% end -%>
+<% @pre_ups.each do |pu| -%>
+  pre-up <%= pu %>
+<% end -%>
+<% @ups.each do |u| -%>
+  up <%= u %>
+<% end -%>
+<% @downs.each do |d| -%>
+  down <%= d %>
+<% end -%>
+<% @post_downs.each do |pd| -%>
+  post-down <%= pd %>
+<% end -%>

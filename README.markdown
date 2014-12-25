@@ -217,3 +217,17 @@ Size of the maximum transportable unit over this interface.
 #####`scope` - string
 Scope of address validity. Values allowed are global, link or host.
 
+#####`pre_ups` - array
+Array of commands to be added as pre-up.
+
+#####`ups` - array
+Array of commands to be added as up.
+
+#####`downs` - array
+Array of commands to be added as down.
+
+#####`post_downs` - array
+Array of commands to be added as post-down.
+
+#####`aux_ops` - hash
+Auxiliary options. For future internal use only.
