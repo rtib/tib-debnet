@@ -76,6 +76,24 @@ and hwaddress may be set.
 ```puppet
 debnet::iface::dhcp { 'eth0': }
 ```
+
+###Bridge configuration
+Configuring a software bridge is enabled by declaring a resource of type
+debnet::iface::bridge. Mandatory attribute is the method of configuration of
+the bridge interface. Depending on the method, the mandatory attributes
+of the choosen method are also mandatory for the bridge resource. Optional
+attributes are ports, stp, prio, fwdelay and hello.
+
+An example for configuring a bridge is:
+
+```puppet
+debnet::iface::bridge { 'br0':
+  ports  => ['eth1','eth2'],
+  stp    => true,
+  method => 'manual',
+}
+```
+
 ##Reference
 
 ###Classes
