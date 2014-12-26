@@ -10,6 +10,8 @@
     * [Configuring the loopback interface](#loopback-config)
     * [Static IPv4 configuration](#static-config)
     * [DHCP configuration](#dhcp-config)
+    * [Bridge configuration](#bridge-config)
+
 4. [Reference](#reference)
 
 ##Overview
@@ -55,6 +57,13 @@ loopback interface.
 debnet::iface::loopback { 'lo': }
 ```
 
+Alternatively, you may use the generic resource debnet::iface as:
+```puppet
+debnet::iface { 'lo':
+  method => 'loopback',
+}
+```
+
 ###Static IPv4 configuration
 For a static IP configuration the attributes address and netmask are
 mandatory. Attributes broadcast, gateway, pointopoint, hwaddress, mtu and
@@ -68,6 +77,15 @@ debnet::iface::static { 'eth0':
 }
 ```
 
+The alternative configuration using generic resource is:
+```puppet
+debnet::iface { 'eth0':
+  method => 'static',
+  netmask => '24',
+  gateway => '192.168.0.1',
+}
+```
+
 ###DHCP configuration
 Configuring an interface by dhcp is enabled through method set to 
 according. Optional attributes hostname, metric, leasetime, vendor, client
@@ -75,6 +93,13 @@ and hwaddress may be set.
 
 ```puppet
 debnet::iface::dhcp { 'eth0': }
+```
+
+The alternative configuration using generic resource is:
+```puppet
+debnet::iface { 'eth0':
+  method => 'dhcp',
+}
 ```
 
 ###Bridge configuration
@@ -93,6 +118,32 @@ debnet::iface::bridge { 'br0':
   method => 'manual',
 }
 ```
+
+The alternative configuration using the debnet::iface resource is more
+sophicticated here and needs more attention. First, it must be taken care that
+the package bridge-utils is installed on the node. Second, the bridge interface
+can be configured with debnet::iface by adding the bridge options through
+auxiliary attribute hash.
+
+```puppet
+debnet::iface { 'br0':
+  method  => 'manual',
+  aux_ops => {
+    'bridge_ports' => 'eth1 eth2',
+    'bridge_stp'   => 'on',
+  },
+}
+```
+
+The debnet::iface::bridge resource is defining interfaces for many ports of the
+bridge with manual configuration to inhibit multiple use of the same interface.
+
+###Up and down command hooks
+Many debnet resources allow to add commands to the usual up/down hooks. The
+attributes pre_ups, ups, downs and post_downs are available for many resources.
+Each of which are typed as array and many elements will be added in order as
+pre-up, up, down or post-down options, respectively. High care must be taken 
+while using these attributes, since the module does not do any kind of checks.
 
 ##Reference
 
