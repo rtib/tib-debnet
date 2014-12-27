@@ -11,6 +11,7 @@
     * [Static IPv4 configuration](#static-config)
     * [DHCP configuration](#dhcp-config)
     * [Bridge configuration](#bridge-config)
+    * [Using Up and down command hooks](#updown-hooks)
 
 4. [Reference](#reference)
 
@@ -138,13 +139,20 @@ debnet::iface { 'br0':
 The debnet::iface::bridge resource is defining interfaces for many ports of the
 bridge with manual configuration to inhibit multiple use of the same interface.
 
-###Up and down command hooks
+###Using Up and down command hooks
 Many debnet resources allow to add commands to the usual up/down hooks. The
 attributes pre_ups, ups, downs and post_downs are available for many resources.
 Each of which are typed as array and many elements will be added in order as
 pre-up, up, down or post-down options, respectively. High care must be taken 
 while using these attributes, since the module does not do any kind of checks.
 
+
+```puppet
+debnet::iface::dhcp { 'eth0':
+  ups   => ['echo "eth0 is up"'],
+  downs => ['echo "eth0 is going down"']
+}
+```
 ##Reference
 
 ###Classes
