@@ -25,7 +25,7 @@
   "source": "https://github.com/rtib/tib-debnet.git",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
   "tags": [
-  	"debian","network","interfaces","ifup","ifdown"
+  	"network","interfaces","ifup","ifdown","bridge"
   ],
   "version": "0.3.0"
 }
