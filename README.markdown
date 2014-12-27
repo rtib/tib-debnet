@@ -82,6 +82,7 @@ The alternative configuration using generic resource is:
 ```puppet
 debnet::iface { 'eth0':
   method => 'static',
+  address => '192.168.0.10',
   netmask => '24',
   gateway => '192.168.0.1',
 }
