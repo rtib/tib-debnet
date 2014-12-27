@@ -12,7 +12,6 @@
     * [DHCP configuration](#dhcp-config)
     * [Bridge configuration](#bridge-config)
     * [Using Up and down command hooks](#updown-hooks)
-
 4. [Reference](#reference)
 
 ##Overview
@@ -82,6 +81,7 @@ The alternative configuration using generic resource is:
 ```puppet
 debnet::iface { 'eth0':
   method => 'static',
+  address => '192.168.0.10',
   netmask => '24',
   gateway => '192.168.0.1',
 }
