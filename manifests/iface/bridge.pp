@@ -146,7 +146,7 @@ define debnet::iface::bridge(
   }
   
   if size($ports) > 0 {
-    $brports = join($ports, " ")
+    $brports = join($ports, ' ')
     debnet::iface { $ports:
       method => 'manual',
     }
@@ -199,6 +199,12 @@ define debnet::iface::bridge(
     pointopoint => $pointopoint,
     mtu         => $mtu,
     scope       => $scope,
-    aux_ops     => merge($bropts0, $bropts1, $bropts2, $bropts3, $bropts4, $bropts5),
+    aux_ops     => merge(
+      $bropts0,
+      $bropts1,
+      $bropts2,
+      $bropts3,
+      $bropts4,
+      $bropts5),
   }
 }
