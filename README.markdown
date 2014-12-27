@@ -12,7 +12,6 @@
     * [DHCP configuration](#dhcp-config)
     * [Bridge configuration](#bridge-config)
     * [Using Up and down command hooks](#updown-hooks)
-
 4. [Reference](#reference)
 
 ##Overview
