@@ -146,7 +146,6 @@ Each of which are typed as array and many elements will be added in order as
 pre-up, up, down or post-down options, respectively. High care must be taken 
 while using these attributes, since the module does not do any kind of checks.
 
-
 ```puppet
 debnet::iface::dhcp { 'eth0':
   ups   => ['echo "eth0 is up"'],
