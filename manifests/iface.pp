@@ -199,7 +199,7 @@ define debnet::iface (
         validate_re($pointopoint, '(:?[0-9]{1,3}\.){3}[0-9]{1,3}$')
       }
       if $hwaddress {
-        validate_re($hwaddress, '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$')
+        validate_re($hwaddress, '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$')
       }
       if $mtu { validate_re($mtu, '^\d+$') }
       if $scope { validate_re($scope, '^global$|^link$|^host$') }
