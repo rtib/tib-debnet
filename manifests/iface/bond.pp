@@ -1,6 +1,6 @@
-# == Define: iface::bridge
+# == Define: iface::bond
 #
-# Resource to define a bridge interface configuration stanza within
+# Resource to define a bonding interface configuration stanza within
 # interfaces(5).
 #
 # == Parameters
@@ -69,21 +69,6 @@
 # [*scope*] - string
 #  Scope of address validity. Values allowed are global, link or host.
 #
-# [*ports*] - array
-#  Array of ports to be added to the bridge.
-#
-# [*stp*] - bool
-#  Sets if bridge should implement spanning tree protocol.
-#
-# [*prio*] - int
-#  Priority of the bridge for root selection within spanning tree.
-#
-# [*fwdelay*] - int
-#  Sets the forward delay of the bridge in seconds.
-#
-# [*hello*] - int
-#  Sets the bridge hello time in seconds.
-#
 # === Authors
 #
 # Tibor Repasi
@@ -104,7 +89,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-define debnet::iface::bridge(
+define debnet::iface::bond(
   $method,
   $ifname = $title,
   $auto = true,
@@ -112,12 +97,10 @@ define debnet::iface::bridge(
   $family = 'inet',
   $order = 0,
 
-  # bridge options
+  # bond options
   $ports = [],
-  $stp = false,
-  $prio = undef,
-  $fwdelay = undef,
-  $hello = undef,
+  $mode = 'active-backup',
+  $miimon = 100,
 
   # options for multiple methods
   $metric = undef,
@@ -139,54 +122,40 @@ define debnet::iface::bridge(
   $scope = undef,
 
 ) {
-  if !defined(Package['bridge-utils']) {
-    package { 'bridge-utils':
+  if !defined(Package['ifenslave']) {
+    package { 'ifenslave':
       ensure => 'installed',
     }
   }
+
+  validate_array($ports)
+  if size($ports) == 0 {
+    fail('Bonding needs at least one port to be declared!')
+  }
+  validate_re($mode, '^balance\-rr$|^active\-backup$|^balance\-xor$|^broadcast$|^802\.3ad$|^balance\-tlb$|^balance\-alb$')
   
-  if size($ports) > 0 {
-    $brports = join($ports, ' ')
-    debnet::iface { $ports:
-      method => 'manual',
-    }
-  } else {
-    $brports = 'none'
+  debnet::iface { $ports:
+    method  => 'manual',
+    auto    => $auto,
+    allows  => $allows,
+    family  => $family,
+    order   => 50 + $order,
+    mtu     => $mtu,
+    aux_ops => {
+      'bond-master'  => $ifname,
+      'bond-mode'    => $mode,
+      'bond-primary' => $ports[1],
+    },
   }
-  $bropts0 = {'bridge_ports' => $brports}
-  if $hwaddress {
-    $bropts1 = {'bridge_hw' => $hwaddress}
-  } else {
-    $bropts1 = {}
-  }
-  $bropts2 = {'bridge_stp' => $stp ? { true => 'on', default => 'off'} }
-  if $stp {
-    if $prio {
-      validate_re($prio, '^\d+$')
-      $bropts3 = { 'bridge_bridgeprio' => $prio}
-    } else {
-      $bropts3 = {}
-    }
-    if $fwdelay {
-      validate_re($fwdelay, '^\d+$')
-      $bropts4 = { 'bridge_fd' => $fwdelay }
-    } else {
-      $bropts4 = {}
-    }
-    if $hello {
-      validate_re($hello, '^\d+$')
-      $bropts5 = { 'bridge_hello' => $hello }
-    } else {
-      $bropts5 = {}
-    }
-  }
+
   debnet::iface { $ifname:
     method      => $method,
     auto        => $auto,
     allows      => $allows,
     family      => $family,
-    order       => $order,
+    order       => 60 + $order,
     metric      => $metric,
+    hwaddress   => $hwaddress,
     hostname    => $hostname,
     leasetime   => $leasetime,
     vendor      => $vendor,
@@ -198,12 +167,10 @@ define debnet::iface::bridge(
     pointopoint => $pointopoint,
     mtu         => $mtu,
     scope       => $scope,
-    aux_ops     => merge(
-      $bropts0,
-      $bropts1,
-      $bropts2,
-      $bropts3,
-      $bropts4,
-      $bropts5),
+    aux_ops     => {
+      'bond-slaves'  => 'none',
+      'bond-primary' => $ports[1],
+      'bond-mode'    => $mode,
+    },
   }
 }

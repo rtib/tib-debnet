@@ -80,7 +80,7 @@ debnet::iface::static { 'eth0':
 The alternative configuration using generic resource is:
 ```puppet
 debnet::iface { 'eth0':
-  method => 'static',
+  method  => 'static',
   address => '192.168.0.10',
   netmask => '24',
   gateway => '192.168.0.1',
@@ -138,6 +138,21 @@ debnet::iface { 'br0':
 
 The debnet::iface::bridge resource is defining interfaces for many ports of the
 bridge with manual configuration to inhibit multiple use of the same interface.
+
+###Bonding configuration
+The module allows to bond multiple interfaces together by configuring a linux
+bonding device.
+
+```puppet
+debnet::iface::bond { 'bond0':
+  ports => ['eth1', 'eth2'],
+  method => 'manual',
+}
+```
+
+Such a configuration will create the interfaces(5) stanzas for many ports and
+the bonding device. The array in argument ports must have at least one item,
+and the first item will be configured as bond-primary.
 
 ###Using Up and down command hooks
 Many debnet resources allow to add commands to the usual up/down hooks. The
