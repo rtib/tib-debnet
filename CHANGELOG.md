@@ -1,3 +1,13 @@
+##2015-??-?? - Release 1.0.0
+
+###Summary
+
+###Changes
+- including the module is not necessary anymore
+
+###Features
+- support for bonding devices
+
 ##2014-12-27 - Release 0.3.1
 
 ###Summary

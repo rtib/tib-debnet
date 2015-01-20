@@ -144,6 +144,8 @@ define debnet::iface (
   # auxiliary options
   $aux_ops = {},
 ) {
+  include debnet
+  
   validate_string($ifname)
   validate_bool($auto)
   validate_array($allows)

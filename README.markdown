@@ -28,16 +28,11 @@ network interfaces.
 ##Setup
 
 ###Beginning with the module
-To start with the debnet module the node definition must include the
-module itself. Many nodes need at least a loopback interface which might
-be:
+To start with the debnet module the node can simply declare resources. Many
+nodes need at least a loopback interface which might look like:
 
 ```puppet
-include debnet
-
-debnet::iface { 'lo':
-  method => 'loopback',
-}
+debnet::iface::loopback { 'lo': }
 ```
 
 ###Available configuration methods
@@ -64,10 +59,10 @@ debnet::iface { 'lo':
 }
 ```
 
-###Static IPv4 configuration
-For a static IP configuration the attributes address and netmask are
-mandatory. Attributes broadcast, gateway, pointopoint, hwaddress, mtu and
-scope are optional.
+###Static IPv4 interface configuration
+For a static IP configuration the attributes address and netmask are mandatory.
+Attributes broadcast, gateway, pointopoint, hwaddress, mtu and scope are
+optional.
 
 ```puppet
 debnet::iface::static { 'eth0':
