@@ -11,6 +11,7 @@
     * [Static IPv4 configuration](#static-config)
     * [DHCP configuration](#dhcp-config)
     * [Bridge configuration](#bridge-config)
+    * [Bonding configuration](#bond-config)
     * [Using Up and down command hooks](#updown-hooks)
 4. [Reference](#reference)
 
@@ -144,6 +145,21 @@ debnet::iface::bond { 'bond0':
   method => 'manual',
 }
 ```
+
+Available attributes:
+* ports - array of slave interfaces
+* mode - string with bonding mode, supported modes are
+** balance-rr
+** active-backup
+** balance\-xor
+** broadcast
+** 802.3ad
+** balance-tlb
+** balance-alb
+* miimon - integer setting of mii monitor timing
+* use_carrier - bool to enable carrier sense (if supported)
+* updelay - integer setting the updelay timer
+* downdelay - integer setting the downdelay timer
 
 Such a configuration will create the interfaces(5) stanzas for many ports and
 the bonding device. The array in argument ports must have at least one item,
