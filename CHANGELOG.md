@@ -1,6 +1,7 @@
 ##2015-01-20 - Release 1.0.0
 
 ###Summary
+Added support for bonding and removed the need of including the module.
 
 ###Changes
 - including the module is not necessary anymore
