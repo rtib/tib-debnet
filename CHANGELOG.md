@@ -1,3 +1,11 @@
+##2015-01-20 - Release 1.0.1
+
+###Summary
+Bugfix.
+
+###Changes
+- Validation of bonding attributes fixed.
+
 ##2015-01-20 - Release 1.0.0
 
 ###Summary
