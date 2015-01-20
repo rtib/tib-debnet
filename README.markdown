@@ -151,7 +151,7 @@ Available attributes:
 * mode - string with bonding mode, supported modes are
 *   balance-rr
 *   active-backup
-*   balance\-xor
+*   balance-xor
 *   broadcast
 *   802.3ad
 *   balance-tlb
