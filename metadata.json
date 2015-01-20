@@ -1,9 +1,9 @@
 {
   "name": "trepasi-debnet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "T. Repasi",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
-  "tags": ["network","interfaces","ifup","ifdown","bridge"],
+  "tags": ["network","interfaces","ifup","ifdown","bridge","bonding"],
   "license": "Apache-2.0",
   "project_page": "https://github.com/rtib/tib-debnet.git",
   "source": "https://github.com/rtib/tib-debnet.git",

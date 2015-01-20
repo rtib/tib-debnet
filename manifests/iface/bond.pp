@@ -147,14 +147,14 @@ define debnet::iface::bond(
 
   validate_bool($use_carrier)
   if $updelay {
-    validate_bool($updelay)
+    validate_re($updelay, '^\d+$')
     $bondopts1 = {'bond-updelay' => $updelay}
   } else {
     $bondopts1 = {}
   }
   
   if $downdelay {
-    validate_bool($downdelay)
+    validate_re($downdelay, '^\d+$')
     $bondopts2 = {'bond-downdelay' => $downdelay}
   } else {
     $bondopts2 = {}
