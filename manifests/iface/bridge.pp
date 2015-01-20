@@ -137,7 +137,6 @@ define debnet::iface::bridge(
   $pointopoint = undef,
   $mtu = undef,
   $scope = undef,
-
 ) {
   if !defined(Package['bridge-utils']) {
     package { 'bridge-utils':

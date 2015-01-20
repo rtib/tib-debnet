@@ -101,6 +101,9 @@ define debnet::iface::bond(
   $ports = [],
   $mode = 'active-backup',
   $miimon = 100,
+  $use_carrier = true,
+  $updelay = undef,
+  $downdelay = undef,
 
   # options for multiple methods
   $metric = undef,
@@ -127,12 +130,35 @@ define debnet::iface::bond(
       ensure => 'installed',
     }
   }
-
+  
   validate_array($ports)
   if size($ports) == 0 {
     fail('Bonding needs at least one port to be declared!')
   }
-  validate_re($mode, '^balance\-rr$|^active\-backup$|^balance\-xor$|^broadcast$|^802\.3ad$|^balance\-tlb$|^balance\-alb$')
+  validate_re($mode,
+    '^balance\-rr$|^active\-backup$|^balance\-xor$|^broadcast$|^802\.3ad$|^balance\-tlb$|^balance\-alb$')
+  validate_re($miimon, '^\d+$')
+  $bondopts0 = {
+      'bond-slaves'  => 'none',
+      'bond-primary' => $ports[1],
+      'bond-mode'    => $mode,
+      'bond-miimon'  => $miimon,
+    }
+
+  validate_bool($use_carrier)
+  if $updelay {
+    validate_bool($updelay)
+    $bondopts1 = {'bond-updelay' => $updelay}
+  } else {
+    $bondopts1 = {}
+  }
+  
+  if $downdelay {
+    validate_bool($downdelay)
+    $bondopts2 = {'bond-downdelay' => $downdelay}
+  } else {
+    $bondopts2 = {}
+  }
   
   debnet::iface { $ports:
     method  => 'manual',
@@ -167,10 +193,10 @@ define debnet::iface::bond(
     pointopoint => $pointopoint,
     mtu         => $mtu,
     scope       => $scope,
-    aux_ops     => {
-      'bond-slaves'  => 'none',
-      'bond-primary' => $ports[1],
-      'bond-mode'    => $mode,
-    },
+    aux_ops     => merge(
+      $bondopts0,
+      $bondopts1,
+      $bondopts2
+    ),
   }
 }
