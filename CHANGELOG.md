@@ -1,3 +1,10 @@
+##2015-??-?? - Release ?
+
+###Summary
+
+###Features
+- support for Debian 6 and Ubuntu 12.04 added to metadata.json
+
 ##2015-01-20 - Release 1.0.1
 
 ###Summary
