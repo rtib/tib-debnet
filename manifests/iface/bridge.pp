@@ -84,6 +84,22 @@
 # [*hello*] - int
 #  Sets the bridge hello time in seconds.
 #
+# [*pre_ups*] - array
+#  Array of commands to be run prior to bringing this interface up.
+#
+# [*ups*] - array
+#  Array of commands to be run after bringing this interface up.
+#  
+# [*downs*] - array
+#  Array of commands to be run prior to bringing this interface down.
+#
+# [*post_downs*] - array
+#  Array of commands to be run after bringing this interface down.
+#
+# [*aux_ops*] - hash
+#  Hash of key-value pairs with auxiliary options for this interface.
+#  To be used by other debnet types only.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -137,6 +153,15 @@ define debnet::iface::bridge(
   $pointopoint = undef,
   $mtu = undef,
   $scope = undef,
+
+  # up and down commands
+  $pre_ups = [],
+  $ups = [],
+  $downs = [],
+  $post_downs = [],
+
+  # auxiliary options
+  $aux_ops = {},
 ) {
   if !defined(Package['bridge-utils']) {
     package { 'bridge-utils':
@@ -197,7 +222,12 @@ define debnet::iface::bridge(
     pointopoint => $pointopoint,
     mtu         => $mtu,
     scope       => $scope,
+    pre_ups     => $pre_ups,
+    ups         => $ups,
+    downs       => $downs,
+    post_downs  => $post_downs,
     aux_ops     => merge(
+#      $aux_ops,
       $bropts0,
       $bropts1,
       $bropts2,

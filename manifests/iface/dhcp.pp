@@ -47,6 +47,22 @@
 # [*metric*] - int
 #  Routing metric for routes added resolved on this interface.
 #
+# [*pre_ups*] - array
+#  Array of commands to be run prior to bringing this interface up.
+#
+# [*ups*] - array
+#  Array of commands to be run after bringing this interface up.
+#  
+# [*downs*] - array
+#  Array of commands to be run prior to bringing this interface down.
+#
+# [*post_downs*] - array
+#  Array of commands to be run after bringing this interface down.
+#
+# [*aux_ops*] - hash
+#  Hash of key-value pairs with auxiliary options for this interface.
+#  To be used by other debnet types only.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -80,6 +96,15 @@ define debnet::iface::dhcp (
   $leasetime = undef,
   $vendor = undef,
   $client = undef,
+
+  # up and down commands
+  $pre_ups = [],
+  $ups = [],
+  $downs = [],
+  $post_downs = [],
+
+  # auxiliary options
+  $aux_ops = {},
 ) {
   validate_string($ifname)
   validate_bool($auto)
@@ -87,12 +112,17 @@ define debnet::iface::dhcp (
   validate_re($family, '^inet$' )
   
   debnet::iface { $ifname :
-    method    => 'dhcp',
-    hostname  => $hwaddress,
-    metric    => $metric,
-    leasetime => $leasetime,
-    vendor    => $vendor,
-    client    => $client,
-    hwaddress => $hwaddress,
+    method     => 'dhcp',
+    hostname   => $hwaddress,
+    metric     => $metric,
+    leasetime  => $leasetime,
+    vendor     => $vendor,
+    client     => $client,
+    hwaddress  => $hwaddress,
+    pre_ups    => $pre_ups,
+    ups        => $ups,
+    downs      => $downs,
+    post_downs => $post_downs,
+    aux_ops    => $aux_ops,
   }
 }

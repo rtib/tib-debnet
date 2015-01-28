@@ -14,6 +14,22 @@
 # [*allows*] - array
 #   Adds an allow- entry to the interface stanza.
 #
+# [*pre_ups*] - array
+#  Array of commands to be run prior to bringing this interface up.
+#
+# [*ups*] - array
+#  Array of commands to be run after bringing this interface up.
+#  
+# [*downs*] - array
+#  Array of commands to be run prior to bringing this interface down.
+#
+# [*post_downs*] - array
+#  Array of commands to be run after bringing this interface down.
+#
+# [*aux_ops*] - hash
+#  Hash of key-value pairs with auxiliary options for this interface.
+#  To be used by other debnet types only.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -40,15 +56,29 @@ define debnet::iface::loopback (
   $allows = [],
   $family = 'inet',
   $order = 0,
+
+  # up and down commands
+  $pre_ups = [],
+  $ups = [],
+  $downs = [],
+  $post_downs = [],
+
+  # auxiliary options
+  $aux_ops = {},
 ) {
   validate_re($ifname, '^lo$')
   validate_bool($auto)
   validate_array($allows)
   validate_re($family, '^inet$' )
   debnet::iface { $ifname:
-    method => 'loopback',
-    auto   => $auto,
-    allows => $allows,
-    family => $family,
+    method     => 'loopback',
+    auto       => $auto,
+    allows     => $allows,
+    family     => $family,
+    pre_ups    => $pre_ups,
+    ups        => $ups,
+    downs      => $downs,
+    post_downs => $post_downs,
+    aux_ops    => $aux_ops,
   }
 }
