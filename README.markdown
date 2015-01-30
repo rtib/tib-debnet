@@ -148,14 +148,8 @@ debnet::iface::bond { 'bond0':
 
 Available attributes:
 * ports - array of slave interfaces
-* mode - string with bonding mode, supported modes are
-*   balance-rr
-*   active-backup
-*   balance-xor
-*   broadcast
-*   802.3ad
-*   balance-tlb
-*   balance-alb
+* mode - string with bonding mode, supported modes are: balance-rr,
+ active-backup, balance-xor, broadcast, 802.3ad, balance-tlb, balance-alb.
 * miimon - integer setting of mii monitor timing
 * use_carrier - bool to enable carrier sense (if supported)
 * updelay - integer setting the updelay timer
