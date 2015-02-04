@@ -1,6 +1,7 @@
-##2015-??-?? - Release ?
+##2015-02-04 - Release 1.1.0
 
 ###Summary
+Operating system support tested. Up and down hooks now available for many resources.
 
 ###Features
 - support for Debian 6 and Ubuntu 12.04 added to metadata.json
