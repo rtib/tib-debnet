@@ -1,6 +1,6 @@
 {
   "name": "trepasi-debnet",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "T. Repasi",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
   "tags": ["network","interfaces","ifup","ifdown","bridge","bonding"],
@@ -19,6 +19,7 @@
     {"name":"puppetlabs/stdlib","version_requirement":"4.3.x"}
   ],
   "requirements": [
-    {"name": "puppet", "version_requirement": "3.x" }
+    {"name": "puppet", "version_requirement": "3.x" },
+    {"name": "puppet", "version_requirement": ">=2.7.20 <4.0.0" }
   ]
 }
