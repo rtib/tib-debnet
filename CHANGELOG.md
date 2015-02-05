@@ -1,3 +1,14 @@
+##2015-02-05 - Release 1.1.1
+
+###Summary
+Documentation bugfixes.
+
+###Features
+
+###Bugfixes
+- requirements corrected
+- README links fixed
+
 ##2015-02-04 - Release 1.1.0
 
 ###Summary
