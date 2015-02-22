@@ -125,7 +125,7 @@ define debnet::iface (
   $leasetime = undef,
   $vendor = undef,
   $client = undef,
-  
+
   # options for method static
   $address = undef,
   $netmask = undef,
@@ -143,6 +143,9 @@ define debnet::iface (
 
   # auxiliary options
   $aux_ops = {},
+
+  # feature-helpers
+  $tx_queue = undef,
 ) {
   include debnet
   
@@ -156,6 +159,9 @@ define debnet::iface (
   validate_array($ups)
   validate_array($downs)
   validate_array($post_downs)
+  if $tx_queue {
+    validate_re($tx_queue, '^\d+$')
+  }
   
   case $method {
     'loopback' : {

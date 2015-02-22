@@ -162,6 +162,9 @@ define debnet::iface::bridge(
 
   # auxiliary options
   $aux_ops = {},
+
+  # feature-helpers
+  $tx_queue = undef,
 ) {
   if !defined(Package['bridge-utils']) {
     package { 'bridge-utils':
@@ -172,7 +175,8 @@ define debnet::iface::bridge(
   if size($ports) > 0 {
     $brports = join($ports, ' ')
     debnet::iface { $ports:
-      method => 'manual',
+      method   => 'manual',
+      tx_queue => $tx_queue,
     }
   } else {
     $brports = 'none'
@@ -234,5 +238,6 @@ define debnet::iface::bridge(
       $bropts3,
       $bropts4,
       $bropts5),
+    tx_queue    => $tx_queue,
   }
 }
