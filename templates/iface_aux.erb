@@ -4,9 +4,6 @@
 <% @pre_ups.each do |pu| -%>
   pre-up <%= pu %>
 <% end -%>
-<% if @tx_queue -%>
-  up ip link set <%= @ifname -%> txqueuelen <%= @tx_queue %>
-<% end -%>
 <% @ups.each do |u| -%>
   up <%= u %>
 <% end -%>

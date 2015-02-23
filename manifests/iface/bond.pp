@@ -153,9 +153,6 @@ define debnet::iface::bond(
   # auxiliary options
   $aux_ops_master = {},
   $aux_ops_slaves = {},
-
-  # feature-helpers
-  $tx_queue = undef,
 ) {
   if !defined(Package['ifenslave']) {
     package { 'ifenslave':
@@ -211,7 +208,6 @@ define debnet::iface::bond(
         'bond-primary' => $ports[1],
       }
     ),
-    tx_queue   => $tx_queue,
   }
 
   debnet::iface { $ifname:
@@ -243,6 +239,5 @@ define debnet::iface::bond(
       $bondopts1,
       $bondopts2
     ),
-    tx_queue    => tx_queue,
   }
 }
