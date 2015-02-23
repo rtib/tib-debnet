@@ -1,3 +1,11 @@
+##2015-??-?? - Release 1.2.0
+
+###Summary
+Introduction of feature helpers.
+
+###Features
+- feature helper tx_queue added for setting tx queue length of an interface
+
 ##2015-02-05 - Release 1.1.1
 
 ###Summary
