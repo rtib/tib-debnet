@@ -119,11 +119,18 @@ Many resource types have some common attributes. These are:
 * ```$order``` - (int - mandatory) ordering of the resource (default: 0)
 
 ##Advanced configuration methods
+The module also gives a convenient way to declare more sofisticated network
+configurations like bonding of multiple interfaces or creating brindg devices.
+To leaverage from these it is necessary to learn how raw configuration of
+interfaces work by usage of ```debnet::iface``` type resource. This will allow
+the declaration of bonded interfaces through ```debnet::iface::bond``` and
+bridges through ```debnet::iface::bridge```.
+
+###Raw interface configuration
 Using the specialised resources is convenient but not feasable in some
 circumstances. Therefore it might be necessera, however, to create
 configurations using the ```debnet::iface``` generic resource type.
 
-###Raw interface configuration
 The above examples can be alternatively configured by using ```debnet::iface```
 typo as follows:
 
@@ -169,6 +176,17 @@ debnet::iface::bridge { 'br0':
 The debnet::iface::bridge resource is defining interfaces for many ports of the
 bridge with manual configuration to inhibit multiple use of the same interface.
 
+Available attributes:
+* ```$method``` - (string) interface configuration method (mandatory)
+* ```$ifname``` - (string) iface name (default: ```$title```)
+* ```$ports``` - (array) ports to be added (default: ```[]```)
+* ```$stp``` - (bool) enable IEEE 802.1d spanning tree protocol (default: false)
+* ```$prio``` - (int) STP bridge priority (optional)
+* ```$fwdelay``` - (int) forward delay (optional)
+* ```$hello``` - (int) hello timing (optional)
+* ```$maxage``` - (int) max BPDU age (optional)
+* ```$maxwait``` - (int) max seconds to wait for ports to come up (optional)
+
 ###Bonding configuration
 The module allows to bond multiple interfaces together by configuring a linux
 bonding device.
@@ -179,15 +197,16 @@ debnet::iface::bond { 'bond0':
   method => 'manual',
 }
 ```
+Supported bonding modes are: balance-rr, active-backup, balance-xor, broadcast,
+802.3ad, balance-tlb, balance-alb.
 
 Available attributes:
-* ports - array of slave interfaces
-* mode - string with bonding mode, supported modes are: balance-rr,
- active-backup, balance-xor, broadcast, 802.3ad, balance-tlb, balance-alb.
-* miimon - integer setting of mii monitor timing
-* use_carrier - bool to enable carrier sense (if supported)
-* updelay - integer setting the updelay timer
-* downdelay - integer setting the downdelay timer
+* ```$ports``` - (array) slave interfaces (mandatory)
+* ```$mode``` - (string) bonding mode (default: active-backup)
+* ```$miimon``` - (int) mii monitor timing (default: 100)
+* ```$use_carrier``` - (bool) enable carrier sense (default: true)
+* ```$updelay``` - (int) setting the updelay timer (optional)
+* ```$downdelay``` - (int) setting the downdelay timer (optional)
 
 Such a configuration will create the interfaces(5) stanzas for many ports and
 the bonding device. The array in argument ports must have at least one item,
