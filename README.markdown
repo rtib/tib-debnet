@@ -61,7 +61,7 @@ are:
 * manual
 
 ###Configuring the loopback interface
-Currently there is on a single way to create a configuration on the
+Currently there is only a single way to create a configuration on the
 loopback interface.
 
 ```puppet
@@ -121,7 +121,7 @@ Many resource types have some common attributes. These are:
 
 ##Advanced configuration methods
 The module also gives a convenient way to declare more sofisticated network
-configurations like bonding of multiple interfaces or creating brindg devices.
+configurations like bonding of multiple interfaces or creating bridge devices.
 To leaverage from these it is necessary to learn how raw configuration of
 interfaces work by usage of ```debnet::iface``` type resource. This will allow
 the declaration of bonded interfaces through ```debnet::iface::bond``` and
@@ -129,11 +129,11 @@ bridges through ```debnet::iface::bridge```.
 
 ###Raw interface configuration
 Using the specialised resources is convenient but not feasable in some
-circumstances. Therefore it might be necessera, however, to create
+circumstances. Therefore it might be necessery, however, to create
 configurations using the ```debnet::iface``` generic resource type.
 
 The above examples can be alternatively configured by using ```debnet::iface```
-typo as follows:
+type as follows:
 
 Loopback interface:
 ```puppet
@@ -160,9 +160,9 @@ debnet::iface { 'eth0':
 
 ###Bridge configuration
 Configuring a software bridge is enabled by declaring a resource of type
-debnet::iface::bridge. Mandatory attribute is the method of configuration of
-the bridge interface. Depending on the method, the mandatory attributes
-of the choosen method are also mandatory for the bridge resource. Optional
+```debnet::iface::bridge```. Mandatory attribute is the method of configuration
+of the bridge interface. Depending on the method, the mandatory attributes of
+the choosen method are also mandatory for the bridge resource. Optional
 attributes are ports, stp, prio, fwdelay and hello.
 
 An example for configuring a bridge is:
