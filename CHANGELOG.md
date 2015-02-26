@@ -1,3 +1,12 @@
+##2015-??-?? - Release 1.?.?
+
+###Summary
+
+###Features
+
+###Fixes
+- Minor improvements in documentation
+
 ##2015-02-26 - Release 1.2.0
 
 ###Summary
