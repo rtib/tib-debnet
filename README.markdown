@@ -82,16 +82,16 @@ debnet::iface::static { 'eth0':
 ```
 
 Available attributes:
-*  ```$ifname``` - (string - mandatory) iface name (default: ```$title```)
-*  ```$address``` - (dotted-quad - mandatory) static address
-*  ```$netmask``` - (int or dotted-quad - mandatory) netmask 
-*  ```$broadcast``` - (dotted-quad - optional) broadcast address
-*  ```$metric``` - (int - optional) metric for routing protocols
-*  ```$gateway``` - (dotted-quad - optional) gateway to set default route
-*  ```$pointopoint``` - (dotted-quad - optional) point-to-point address
-*  ```$hwaddress``` - (macaddress - optional) hardware address to override with
-*  ```$mtu``` - (int - optional) interface MTU
-*  ```$scope``` - (string - optional) address scope
+*  ```$ifname``` - (string) iface name (default: ```$title```)
+*  ```$address``` - (dotted-quad) static address (mandatory)
+*  ```$netmask``` - (int or dotted-quad) netmask (mandatory)
+*  ```$broadcast``` - (dotted-quad) broadcast address (optional)
+*  ```$metric``` - (int) metric for routing protocols
+*  ```$gateway``` - (dotted-quad) gateway to set default route
+*  ```$pointopoint``` - (dotted-quad) point-to-point address
+*  ```$hwaddress``` - (macaddress) hardware address to override with
+*  ```$mtu``` - (int) interface MTU
+*  ```$scope``` - (string) address scope
 
 ###DHCP configuration
 Configuring an interface by dhcp is enabled through method set to 
@@ -103,20 +103,21 @@ debnet::iface::dhcp { 'eth0': }
 ```
 
 Available attributes:
-* ```$ifname``` - (string - mandatory) iface name (default: ```$title```)
-* ```$metric``` - (int - optional) metric for routing protocols
-* ```$hwaddress``` - (macaddress - optional) hardware address to override with
-* ```$hostname``` - (string - optional) hostname to send with DHCP REQUEST
-* ```$leasetime``` - (int - optional) leasetime to request
-* ```$vendor``` - (string - optional) vendor id to send with request
-* ```$client``` - (string - optional) client id to send with request
+* ```$ifname``` - (string) iface name (default: ```$title```)
+* ```$metric``` - (int) metric for routing protocols
+* ```$hwaddress``` - (macaddress) hardware address to override with (optional)
+* ```$hostname``` - (string) hostname to send with DHCP REQUEST (optional)
+* ```$leasetime``` - (int) leasetime to request (optional)
+* ```$vendor``` - (string) vendor id to send with request (optional)
+* ```$client``` - (string) client id to send with request (optional)
 
 ###Common attributes
 Many resource types have some common attributes. These are:
-* ```$auto``` - (bool - mandatory) allow auto-bring-up interface (default: true)
-* ```$allows``` - (array - mandatory) allows-* features (default: [])
-* ```$family``` - (string - mandatory) only inet supported (default: inet)
-* ```$order``` - (int - mandatory) ordering of the resource (default: 0)
+* ```$auto``` - (bool) allow auto-bring-up interface (default: true)
+* ```$allows``` - (array) allows-* features (default: [])
+* ```$family``` - (string) only inet supported (default: inet)
+* ```$order``` - (int) ordering of the resource (default: 0)
+* ```$tx_queue``` - (int) interface tx queue length (optional)
 
 ##Advanced configuration methods
 The module also gives a convenient way to declare more sofisticated network
