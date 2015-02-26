@@ -95,7 +95,7 @@ Available attributes:
 *  ```$address``` - (mandatory) static address
 *  ```$netmask``` - (mandatory) netmask 
 *  ```$broadcast``` - (optional) broadcast address
-*  ```$metric``` - (optional) metric for routeing protocols
+*  ```$metric``` - (optional) metric for routing protocols
 *  ```$gateway``` - (optional) gateway to set default route
 *  ```$pointopoint``` - (optional) point-to-point address
 *  ```$hwaddress``` - (optional) hardware address to override with
@@ -110,6 +110,15 @@ and hwaddress may be set.
 ```puppet
 debnet::iface::dhcp { 'eth0': }
 ```
+
+Available attributes:
+*  ```$ifname``` - (mandatory) iface name (default: ```$title```)
+* ```$metric``` - (optional) metric for routing protocols
+* ```$hwaddress``` - (optional) hardware address to override with
+* ```$hostname``` - (optional) hostname to send with DHCP REQUEST
+* ```$leasetime``` - (optional) leasetime to request
+* ```$vendor``` - (optional) vendor id to send with request
+* ```$client``` - (optional) client id to send with request
 
 ##Advanced configuration methods
 Using the specialised resources is convenient but not feasable in some
