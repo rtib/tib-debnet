@@ -90,6 +90,18 @@ debnet::iface::static { 'eth0':
 }
 ```
 
+Available attributes:
+*  ```$ifname``` - (mandatory) iface name (default: ```$title```)
+*  ```$address``` - (mandatory) static address
+*  ```$netmask``` - (mandatory) netmask 
+*  ```$broadcast``` - (optional) broadcast address
+*  ```$metric``` - (optional) metric for routeing protocols
+*  ```$gateway``` - (optional) gateway to set default route
+*  ```$pointopoint``` - (optional) point-to-point address
+*  ```$hwaddress``` - (optional) hardware address to override with
+*  ```$mtu``` - (optional) interface MTU
+*  ```$scope``` - (optional) address scope
+
 ###DHCP configuration
 Configuring an interface by dhcp is enabled through method set to 
 according. Optional attributes hostname, metric, leasetime, vendor, client
@@ -106,7 +118,7 @@ configurations using the ```debnet::iface``` generic resource type.
 
 ###Raw interface configuration
 The above examples can be alternatively configured by using ```debnet::iface```
-typo as follows>
+typo as follows:
 
 Loopback interface:
 ```puppet
