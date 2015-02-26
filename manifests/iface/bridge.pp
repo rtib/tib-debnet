@@ -84,6 +84,12 @@
 # [*hello*] - int
 #  Sets the bridge hello time in seconds.
 #
+# [*maxage*] - int
+#  Maximum seconds of age of STP message.
+#
+# [*maxwait*] - int
+#  Maximum seconds to wait for bridge interfaces to come up.
+#
 # [*pre_ups*] - array
 #  Array of commands to be run prior to bringing this interface up.
 #
@@ -134,6 +140,8 @@ define debnet::iface::bridge(
   $prio = undef,
   $fwdelay = undef,
   $hello = undef,
+  $maxage = undef,
+  $maxwait = undef,
 
   # options for multiple methods
   $metric = undef,
@@ -207,6 +215,18 @@ define debnet::iface::bridge(
     } else {
       $bropts5 = {}
     }
+    if $maxage {
+      validate_re($maxage, '^\d+$')
+      $bropts6 = { 'bridge_maxage' => $maxage }
+    } else {
+      $bropts6 = {}
+    }
+    if $maxwait {
+      validate_re($maxwait, '^\d+$')
+      $bropts7 = { 'bridge_maxwait' => $maxwait }
+    } else {
+      $bropts7 = {}
+    }
   }
   debnet::iface { $ifname:
     method      => $method,
@@ -237,7 +257,9 @@ define debnet::iface::bridge(
       $bropts2,
       $bropts3,
       $bropts4,
-      $bropts5),
+      $bropts5,
+      $bropts6,
+      $bropts7),
     tx_queue    => $tx_queue,
   }
 }
