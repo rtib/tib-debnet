@@ -10,9 +10,13 @@
     * [Configuring the loopback interface](#configuring-the-loopback-interface)
     * [Static IPv4 configuration](#static-ipv4-interface-configuration)
     * [DHCP configuration](#dhcp-configuration)
+4. [Advanced configuration methods](#advanced-configuration-methods)
+    * [Raw interface configuration](#Raw-interface-configuration)
     * [Bridge configuration](#bridge-configuration)
     * [Bonding configuration](#bonding-configuration)
     * [Using Up and down command hooks](#using-up-and-down-command-hooks)
+5. [Feature helpers](*feature-helpers)
+    * [Queue length](*queue-length)
 
 ##Overview
 
@@ -73,13 +77,6 @@ loopback interface.
 debnet::iface::loopback { 'lo': }
 ```
 
-Alternatively, you may use the generic resource debnet::iface as:
-```puppet
-debnet::iface { 'lo':
-  method => 'loopback',
-}
-```
-
 ###Static IPv4 interface configuration
 For a static IP configuration the attributes address and netmask are mandatory.
 Attributes broadcast, gateway, pointopoint, hwaddress, mtu and scope are
@@ -87,16 +84,6 @@ optional.
 
 ```puppet
 debnet::iface::static { 'eth0':
-  address => '192.168.0.10',
-  netmask => '24',
-  gateway => '192.168.0.1',
-}
-```
-
-The alternative configuration using generic resource is:
-```puppet
-debnet::iface { 'eth0':
-  method  => 'static',
   address => '192.168.0.10',
   netmask => '24',
   gateway => '192.168.0.1',
@@ -112,7 +99,32 @@ and hwaddress may be set.
 debnet::iface::dhcp { 'eth0': }
 ```
 
-The alternative configuration using generic resource is:
+##Advanced configuration methods
+Using the specialised resources is convenient but not feasable in some
+circumstances. Therefore it might be necessera, however, to create
+configurations using the ```debnet::iface``` generic resource type.
+
+###Raw interface configuration
+The above examples can be alternatively configured by using ```debnet::iface```
+typo as follows>
+
+Loopback interface:
+```puppet
+debnet::iface { 'lo':
+  method => 'loopback',
+}
+```
+
+Static interface:
+```puppet
+debnet::iface { 'eth0':
+  method  => 'static',
+  address => '192.168.0.10',
+  netmask => '24',
+  gateway => '192.168.0.1',
+}
+```
+DHCP configuration:
 ```puppet
 debnet::iface { 'eth0':
   method => 'dhcp',
@@ -127,28 +139,11 @@ of the choosen method are also mandatory for the bridge resource. Optional
 attributes are ports, stp, prio, fwdelay and hello.
 
 An example for configuring a bridge is:
-
 ```puppet
 debnet::iface::bridge { 'br0':
   ports  => ['eth1','eth2'],
   stp    => true,
   method => 'manual',
-}
-```
-
-The alternative configuration using the debnet::iface resource is more
-sophicticated here and needs more attention. First, it must be taken care that
-the package bridge-utils is installed on the node. Second, the bridge interface
-can be configured with debnet::iface by adding the bridge options through
-auxiliary attribute hash.
-
-```puppet
-debnet::iface { 'br0':
-  method  => 'manual',
-  aux_ops => {
-    'bridge_ports' => 'eth1 eth2',
-    'bridge_stp'   => 'on',
-  },
 }
 ```
 
@@ -192,3 +187,14 @@ debnet::iface::dhcp { 'eth0':
   downs => ['echo "eth0 is going down"']
 }
 ```
+
+##Feature helpers
+The module provides feature helpers to enable sofisticated configuration
+features to be added easily.
+
+###Queue length
+If the setting of the txqueuelen feature of ethernet interfaces needs to done,
+the attribute ```tx_queue``` can be added to any resource type other than
+loopback. The helper adds an up command to 
+```ip link set <if> txqueuelen <value>```. In case of types bond and bridge, the
+up command is applied to the corresponding slave interfaces.
