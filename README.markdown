@@ -18,6 +18,7 @@
     * [Using Up and down command hooks](#using-up-and-down-command-hooks)
 5. [Feature helpers](*feature-helpers)
     * [Queue length](*queue-length)
+    * [Static routes](*static-routes)
 
 ##Overview
 
