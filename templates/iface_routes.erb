@@ -1,0 +1,4 @@
+<% @routes.keys.sort.each do |k| -%>
+  up ip route add <%= k -%> via <%= @routes[k] %>
+  down ip route del <%= k %>
+<% end %>
