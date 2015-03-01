@@ -18,6 +18,7 @@
     * [Using Up and down command hooks](#using-up-and-down-command-hooks)
 5. [Feature helpers](*feature-helpers)
     * [Queue length](*queue-length)
+    * [Static routes](*static-routes)
 
 ##Overview
 
@@ -247,3 +248,7 @@ the attribute ```tx_queue``` can be added to any resource type other than
 loopback. The helper adds an up command to 
 ```ip link set <if> txqueuelen <value>```. In case of types bond and bridge, the
 up command is applied to the corresponding slave interfaces.
+
+###Static routes
+Static routes can be added to any resource type which is configuring layer-3 of
+an interface. 

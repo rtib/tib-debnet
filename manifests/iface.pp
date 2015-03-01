@@ -146,6 +146,7 @@ define debnet::iface (
 
   # feature-helpers
   $tx_queue = undef,
+  $routes = {},
 ) {
   include debnet
   
@@ -162,7 +163,10 @@ define debnet::iface (
   if $tx_queue {
     validate_re($tx_queue, '^\d+$')
   }
-  
+  if $routes {
+    validate_hash($routes)
+  }
+
   case $method {
     'loopback' : {
       concat::fragment { 'lo_stanza':
@@ -171,7 +175,7 @@ define debnet::iface (
         order   => 10 + $order,
       }
     }
-    
+
     'dhcp' : {
       if !defined(Package['isc-dhcp-client']) {
         package { 'isc-dhcp-client': ensure => 'installed', }
@@ -194,7 +198,7 @@ define debnet::iface (
         order   => 20 + $order,
       }
     }
-    
+
     'static' : {
       validate_re($address, '^(:?[0-9]{1,3}\.){3}[0-9]{1,3}$')
       validate_re($netmask, '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[0-9]{1,2}$')

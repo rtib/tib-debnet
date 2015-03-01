@@ -1,8 +1,9 @@
-##2015-??-?? - Release 1.?.?
+##2015-??-?? - Release 1.3.0
 
 ###Summary
 
 ###Features
+- feature helper for static routes added
 
 ###Fixes
 - Minor improvements in documentation
