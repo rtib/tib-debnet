@@ -248,11 +248,22 @@ loopback. The helper adds an up command to
 ```ip link set <if> txqueuelen <value>```. In case of types bond and bridge, the
 up command is applied to the corresponding slave interfaces.
 
+```puppet
+debnet::iface::dhcp { 'eth0':
+  tx_queue => 50,
+```
+
 ###Static routes
 Static routes can be added to any resource type which is configuring layer-3 of
 an interface. 
 
 ```puppet
-debnet::iface::dhcp { 'eth0':
-  tx_queue => 50,
-```
+debnet::iface::static { 'eth0':
+  address => '192.168.0.10',
+  netmask => '24',
+  gateway => '192.168.0.1',
+  routes  => {
+    '172.16.0.0/12' => '192.168.0.2',
+    '10.0.0.0/8'    => '192.168.0.3',
+  },
+}
