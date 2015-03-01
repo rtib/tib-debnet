@@ -18,7 +18,6 @@
     * [Using Up and down command hooks](#using-up-and-down-command-hooks)
 5. [Feature helpers](*feature-helpers)
     * [Queue length](*queue-length)
-    * [Static routes](*static-routes)
 
 ##Overview
 
@@ -252,3 +251,8 @@ up command is applied to the corresponding slave interfaces.
 ###Static routes
 Static routes can be added to any resource type which is configuring layer-3 of
 an interface. 
+
+```puppet
+debnet::iface::dhcp { 'eth0':
+  tx_queue => 50,
+```
