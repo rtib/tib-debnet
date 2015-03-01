@@ -247,3 +247,8 @@ the attribute ```tx_queue``` can be added to any resource type other than
 loopback. The helper adds an up command to 
 ```ip link set <if> txqueuelen <value>```. In case of types bond and bridge, the
 up command is applied to the corresponding slave interfaces.
+
+```puppet
+debnet::iface::dhcp { 'eth0':
+  tx_queue => 50,
+```
