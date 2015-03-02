@@ -174,8 +174,8 @@ define debnet::iface::bridge(
   # feature-helpers
   $tx_queue = undef,
 ) {
-  if !defined(Package['bridge-utils']) {
-    package { 'bridge-utils':
+  if !defined(Package[$debnet::params::bridge_utils_pkg]) {
+    package { $debnet::params::bridge_utils_pkg:
       ensure => 'installed',
     }
   }
@@ -251,7 +251,7 @@ define debnet::iface::bridge(
     downs       => $downs,
     post_downs  => $post_downs,
     aux_ops     => merge(
-#      $aux_ops,
+      $aux_ops,
       $bropts0,
       $bropts1,
       $bropts2,

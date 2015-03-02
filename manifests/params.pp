@@ -32,4 +32,8 @@
 #
 class debnet::params {
   $interfaces_file = '/etc/network/interfaces'
+  $iproute_pkg = 'iproute'
+  $dhclient_pkg = 'isc-dhcp-client'
+  $bridge_utils_pkg = 'bridge-utils'
+  $ifenslave_pkg = 'ifenslave-2.6'
 }

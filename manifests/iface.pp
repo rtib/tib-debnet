@@ -177,8 +177,8 @@ define debnet::iface (
     }
 
     'dhcp' : {
-      if !defined(Package['isc-dhcp-client']) {
-        package { 'isc-dhcp-client': ensure => 'installed', }
+      if !defined(Package[$debnet::params::dhclient_pkg]) {
+        package { $debnet::params::dhclient_pkg: ensure => 'installed', }
       }
       if $hostname { validate_re($hostname,
         '^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$') }
@@ -194,7 +194,8 @@ define debnet::iface (
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_dhcp.erb',
-          'debnet/iface_aux.erb'),
+          'debnet/iface_aux.erb',
+          'debnet/iface_routed.erb'),
         order   => 20 + $order,
       }
     }
@@ -221,7 +222,8 @@ define debnet::iface (
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_static.erb',
-          'debnet/iface_aux.erb'),
+          'debnet/iface_aux.erb',
+          'debnet/iface_routed.erb'),
         order   => 20 + $order,
       }
     }

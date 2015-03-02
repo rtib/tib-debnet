@@ -37,6 +37,10 @@
 class debnet {
   include debnet::params
 
+  package { $debnet::params::iproute_pkg:
+    ensure => 'installed',
+  }
+
   concat { $params::interfaces_file :
     owner          => 'root',
     group          => 'root',

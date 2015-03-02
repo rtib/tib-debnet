@@ -157,8 +157,8 @@ define debnet::iface::bond(
   # feature-helpers
   $tx_queue = undef,
 ) {
-  if !defined(Package['ifenslave']) {
-    package { 'ifenslave':
+  if !defined(Package[$debnet::params::ifenslave_pkg]) {
+    package { $debnet::params::ifenslave_pkg:
       ensure => 'installed',
     }
   }
