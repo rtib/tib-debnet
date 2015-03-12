@@ -1,11 +1,14 @@
-##2015-??-?? - Release 1.?.?
+##2015-03-12 - Release 1.2.1
 
 ###Summary
+- Bugfix, to resolve dependency problems to newer versions of concat and stdlib
+modules.
 
 ###Features
 
 ###Fixes
 - Minor improvements in documentation
+- Metadata fixed.
 
 ##2015-02-26 - Release 1.2.0
 
