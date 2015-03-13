@@ -16,9 +16,9 @@
     * [Bridge configuration](#bridge-configuration)
     * [Bonding configuration](#bonding-configuration)
     * [Using Up and down command hooks](#using-up-and-down-command-hooks)
-5. [Feature helpers](*feature-helpers)
-    * [Queue length](*queue-length)
-    * [Static routes](*static-routes)
+5. [Feature helpers](#feature-helpers)
+    * [Queue length](#queue-length)
+    * [Static routes](#static-routes)
 
 ##Overview
 
@@ -252,6 +252,7 @@ up command is applied to the corresponding slave interfaces.
 ```puppet
 debnet::iface::dhcp { 'eth0':
   tx_queue => 50,
+}
 ```
 
 ###Static routes
