@@ -119,6 +119,7 @@ define debnet::iface::static (
 
   # feature-helpers
   $tx_queue = undef,
+  $routes = {},
 ) {
   validate_string($ifname)
   validate_bool($auto)
@@ -146,5 +147,6 @@ define debnet::iface::static (
     post_downs  => $post_downs,
     aux_ops     => $aux_ops,
     tx_queue    => $tx_queue,
+    routes      => $routes,
   }
 }

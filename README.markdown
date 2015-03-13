@@ -77,7 +77,7 @@ optional.
 ```puppet
 debnet::iface::static { 'eth0':
   address => '192.168.0.10',
-  netmask => '24',
+  netmask => 24,
   gateway => '192.168.0.1',
 }
 ```
@@ -148,7 +148,7 @@ Static interface:
 debnet::iface { 'eth0':
   method  => 'static',
   address => '192.168.0.10',
-  netmask => '24',
+  netmask => 24,
   gateway => '192.168.0.1',
 }
 ```
@@ -245,15 +245,19 @@ features to be added easily.
 ###Queue length
 If the setting of the txqueuelen feature of ethernet interfaces needs to done,
 the attribute ```tx_queue``` can be added to any resource type other than
-loopback. The helper adds an up command to 
-```ip link set <if> txqueuelen <value>```. In case of types bond and bridge, the
-up command is applied to the corresponding slave interfaces.
+loopback. The helper adds an up command to set the transmit queue of the 
+interface. In case of types bond and bridge, the up command is applied to the
+corresponding slave interfaces.
 
 ```puppet
 debnet::iface::dhcp { 'eth0':
   tx_queue => 50,
 }
 ```
+
+Available attributes:
+* ```tx_queue``` - (int) length of the transmit queue (optional)
+
 
 ###Static routes
 Static routes can be added to any resource type which is configuring layer-3 of
@@ -262,7 +266,7 @@ an interface.
 ```puppet
 debnet::iface::static { 'eth0':
   address => '192.168.0.10',
-  netmask => '24',
+  netmask => 24,
   gateway => '192.168.0.1',
   routes  => {
     '172.16.0.0/12' => '192.168.0.2',

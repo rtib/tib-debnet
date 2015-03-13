@@ -173,6 +173,7 @@ define debnet::iface::bridge(
 
   # feature-helpers
   $tx_queue = undef,
+  $routes = {},
 ) {
   if !defined(Package[$debnet::params::bridge_utils_pkg]) {
     package { $debnet::params::bridge_utils_pkg:
@@ -260,6 +261,6 @@ define debnet::iface::bridge(
       $bropts5,
       $bropts6,
       $bropts7),
-    tx_queue    => $tx_queue,
+    routes      => $routes,
   }
 }

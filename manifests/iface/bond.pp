@@ -156,6 +156,7 @@ define debnet::iface::bond(
 
   # feature-helpers
   $tx_queue = undef,
+  $routes = {},
 ) {
   if !defined(Package[$debnet::params::ifenslave_pkg]) {
     package { $debnet::params::ifenslave_pkg:
@@ -212,6 +213,7 @@ define debnet::iface::bond(
       }
     ),
     tx_queue   => $tx_queue,
+    routes     => $routes,
   }
 
   debnet::iface { $ifname:
@@ -243,6 +245,7 @@ define debnet::iface::bond(
       $bondopts1,
       $bondopts2
     ),
-    tx_queue    => tx_queue,
+    tx_queue    => $tx_queue,
+    routes      => $routes,
   }
 }

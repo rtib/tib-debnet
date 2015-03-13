@@ -195,7 +195,7 @@ define debnet::iface (
           'debnet/iface_header.erb',
           'debnet/inet_dhcp.erb',
           'debnet/iface_aux.erb',
-          'debnet/iface_routed.erb'),
+          'debnet/iface_routes.erb'),
         order   => 20 + $order,
       }
     }
@@ -223,7 +223,7 @@ define debnet::iface (
           'debnet/iface_header.erb',
           'debnet/inet_static.erb',
           'debnet/iface_aux.erb',
-          'debnet/iface_routed.erb'),
+          'debnet/iface_routes.erb'),
         order   => 20 + $order,
       }
     }
