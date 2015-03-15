@@ -45,6 +45,7 @@ nodes need at least a loopback interface which might look like:
 ```puppet
 debnet::iface::loopback { 'lo': }
 ```
+
 Many other declaration may follow. Each of which will create an interface
 configuration. There are specialized resources available for many kind of
 configuration tasks, however, you may also use the simple ```debnet::iface```
@@ -53,7 +54,7 @@ resources do some more validation, which makes the configuration less error
 prone.
 
 ###Available configuration methods
-The resource debnet::iface{} implements different configuration methods
+The resource ```debnet::iface``` implements different configuration methods
 also available for the interfaces(5) stanzas. Currently supported methods
 are:
 * loopback
@@ -83,7 +84,7 @@ debnet::iface::static { 'eth0':
 ```
 
 Available attributes:
-*  ```ifname``` - (string) iface name (default: ```$title```)
+*  ```ifname``` - (string) iface name (default: ```title```)
 *  ```address``` - (dotted-quad) static address (mandatory)
 *  ```netmask``` - (int or dotted-quad) netmask (mandatory)
 *  ```broadcast``` - (dotted-quad) broadcast address (optional)
@@ -174,7 +175,7 @@ debnet::iface::bridge { 'br0':
 }
 ```
 
-The debnet::iface::bridge resource is defining interfaces for many ports of the
+The ```debnet::iface::bridge``` resource is defining interfaces for many ports of the
 bridge with manual configuration to inhibit multiple use of the same interface.
 
 Available attributes:

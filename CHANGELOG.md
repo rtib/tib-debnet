@@ -1,4 +1,10 @@
-##2015-??-?? - Release 1.3.0
+##2015-03-15 - Release 1.3.0
+
+###Summary
+New feature helper allows declaring static routes on interfaces.
+
+###Features
+- feature helper of static routes added
 
 ##2015-03-12 - Release 1.2.1
 
