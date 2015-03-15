@@ -83,16 +83,16 @@ debnet::iface::static { 'eth0':
 ```
 
 Available attributes:
-*  ```$ifname``` - (string) iface name (default: ```$title```)
-*  ```$address``` - (dotted-quad) static address (mandatory)
-*  ```$netmask``` - (int or dotted-quad) netmask (mandatory)
-*  ```$broadcast``` - (dotted-quad) broadcast address (optional)
-*  ```$metric``` - (int) metric for routing protocols
-*  ```$gateway``` - (dotted-quad) gateway to set default route
-*  ```$pointopoint``` - (dotted-quad) point-to-point address
-*  ```$hwaddress``` - (macaddress) hardware address to override with
-*  ```$mtu``` - (int) interface MTU
-*  ```$scope``` - (string) address scope
+*  ```ifname``` - (string) iface name (default: ```$title```)
+*  ```address``` - (dotted-quad) static address (mandatory)
+*  ```netmask``` - (int or dotted-quad) netmask (mandatory)
+*  ```broadcast``` - (dotted-quad) broadcast address (optional)
+*  ```metric``` - (int) metric for routing protocols
+*  ```gateway``` - (dotted-quad) gateway to set default route
+*  ```pointopoint``` - (dotted-quad) point-to-point address
+*  ```hwaddress``` - (macaddress) hardware address to override with
+*  ```mtu``` - (int) interface MTU
+*  ```scope``` - (string) address scope
 
 ###DHCP configuration
 Configuring an interface by dhcp is enabled through method set to 
@@ -104,21 +104,20 @@ debnet::iface::dhcp { 'eth0': }
 ```
 
 Available attributes:
-* ```$ifname``` - (string) iface name (default: ```$title```)
-* ```$metric``` - (int) metric for routing protocols
-* ```$hwaddress``` - (macaddress) hardware address to override with (optional)
-* ```$hostname``` - (string) hostname to send with DHCP REQUEST (optional)
-* ```$leasetime``` - (int) leasetime to request (optional)
-* ```$vendor``` - (string) vendor id to send with request (optional)
-* ```$client``` - (string) client id to send with request (optional)
+* ```ifname``` - (string) iface name (default: ```$title```)
+* ```metric``` - (int) metric for routing protocols
+* ```hwaddress``` - (macaddress) hardware address to override with (optional)
+* ```hostname``` - (string) hostname to send with DHCP REQUEST (optional)
+* ```leasetime``` - (int) leasetime to request (optional)
+* ```vendor``` - (string) vendor id to send with request (optional)
+* ```client``` - (string) client id to send with request (optional)
 
 ###Common attributes
 Many resource types have some common attributes. These are:
-* ```$auto``` - (bool) allow auto-bring-up interface (default: true)
-* ```$allows``` - (array) allows-* features (default: [])
-* ```$family``` - (string) only inet supported (default: inet)
-* ```$order``` - (int) ordering of the resource (default: 0)
-* ```$tx_queue``` - (int) interface tx queue length (optional)
+* ```auto``` - (bool) allow auto-bring-up interface (default: true)
+* ```allows``` - (array) allows-* features (default: [])
+* ```family``` - (string) only inet supported (default: inet)
+* ```order``` - (int) ordering of the resource (default: 0)
 
 ##Advanced configuration methods
 The module also gives a convenient way to declare more sofisticated network
@@ -179,15 +178,15 @@ The debnet::iface::bridge resource is defining interfaces for many ports of the
 bridge with manual configuration to inhibit multiple use of the same interface.
 
 Available attributes:
-* ```$method``` - (string) interface configuration method (mandatory)
-* ```$ifname``` - (string) iface name (default: ```$title```)
-* ```$ports``` - (array) ports to be added (default: ```[]```)
-* ```$stp``` - (bool) enable IEEE 802.1d spanning tree protocol (default: false)
-* ```$prio``` - (int) STP bridge priority (optional)
-* ```$fwdelay``` - (int) forward delay (optional)
-* ```$hello``` - (int) hello timing (optional)
-* ```$maxage``` - (int) max BPDU age (optional)
-* ```$maxwait``` - (int) max seconds to wait for ports to come up (optional)
+* ```method``` - (string) interface configuration method (mandatory)
+* ```ifname``` - (string) iface name (default: ```$title```)
+* ```ports``` - (array) ports to be added (default: ```[]```)
+* ```stp``` - (bool) enable IEEE 802.1d spanning tree protocol (default: false)
+* ```prio``` - (int) STP bridge priority (optional)
+* ```fwdelay``` - (int) forward delay (optional)
+* ```hello``` - (int) hello timing (optional)
+* ```maxage``` - (int) max BPDU age (optional)
+* ```maxwait``` - (int) max seconds to wait for ports to come up (optional)
 
 ###Bonding configuration
 The module allows to bond multiple interfaces together by configuring a linux
@@ -203,12 +202,12 @@ Supported bonding modes are: balance-rr, active-backup, balance-xor, broadcast,
 802.3ad, balance-tlb, balance-alb.
 
 Available attributes:
-* ```$ports``` - (array) slave interfaces (mandatory)
-* ```$mode``` - (string) bonding mode (default: active-backup)
-* ```$miimon``` - (int) mii monitor timing (default: 100)
-* ```$use_carrier``` - (bool) enable carrier sense (default: true)
-* ```$updelay``` - (int) setting the updelay timer (optional)
-* ```$downdelay``` - (int) setting the downdelay timer (optional)
+* ```ports``` - (array) slave interfaces (mandatory)
+* ```mode``` - (string) bonding mode (default: active-backup)
+* ```miimon``` - (int) mii monitor timing (default: 100)
+* ```use_carrier``` - (bool) enable carrier sense (default: true)
+* ```updelay``` - (int) setting the updelay timer (optional)
+* ```downdelay``` - (int) setting the downdelay timer (optional)
 
 Such a configuration will create the interfaces(5) stanzas for many ports and
 the bonding device. The array in argument ports must have at least one item,
@@ -258,10 +257,13 @@ debnet::iface::dhcp { 'eth0':
 Available attributes:
 * ```tx_queue``` - (int) length of the transmit queue (optional)
 
-
 ###Static routes
 Static routes can be added to any resource type which is configuring layer-3 of
-an interface. 
+an interface. Declaring the ```routes``` attribute as a hash which is mapping
+gateway addresses (values) to specific destinations (keys). Destinations are
+declared by a dotted-quad and prefix length, the gateway addresses must be
+dotted-quads. Multiple routes may be declared. Many routes will be added as
+up and down commands to the containing interface.
 
 ```puppet
 debnet::iface::static { 'eth0':
@@ -273,3 +275,7 @@ debnet::iface::static { 'eth0':
     '10.0.0.0/8'    => '192.168.0.3',
   },
 }
+```
+
+Available attributes:
+* ```routes``` - (hash) maps routes to their gateways (optional)
