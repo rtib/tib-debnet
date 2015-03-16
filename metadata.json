@@ -1,6 +1,6 @@
 {
   "name": "trepasi-debnet",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "T. Repasi",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
   "tags": ["network","interfaces","ifup","ifdown","bridge","bonding"],

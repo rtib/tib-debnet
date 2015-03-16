@@ -66,6 +66,8 @@ define debnet::iface::loopback (
   # auxiliary options
   $aux_ops = {},
 ) {
+  include debnet
+
   validate_re($ifname, '^lo$')
   validate_bool($auto)
   validate_array($allows)

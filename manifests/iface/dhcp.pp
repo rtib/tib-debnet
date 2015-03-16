@@ -110,6 +110,8 @@ define debnet::iface::dhcp (
   $tx_queue = undef,
   $routes = {},
 ) {
+  include debnet
+
   validate_string($ifname)
   validate_bool($auto)
   validate_array($allows)

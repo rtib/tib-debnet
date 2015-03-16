@@ -158,6 +158,8 @@ define debnet::iface::bond(
   $tx_queue = undef,
   $routes = {},
 ) {
+  include debnet
+
   if !defined(Package[$debnet::params::ifenslave_pkg]) {
     package { $debnet::params::ifenslave_pkg:
       ensure => 'installed',

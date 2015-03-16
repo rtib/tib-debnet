@@ -175,6 +175,8 @@ define debnet::iface::bridge(
   $tx_queue = undef,
   $routes = {},
 ) {
+  include debnet
+
   if !defined(Package[$debnet::params::bridge_utils_pkg]) {
     package { $debnet::params::bridge_utils_pkg:
       ensure => 'installed',

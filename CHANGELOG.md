@@ -1,3 +1,12 @@
+##2015-03-16 - Release 1.3.1
+
+###Summary
+Fixed issue #2
+
+###Fixes
+- bridge and bond resources were not able to access package names declared in
+params.pp
+
 ##2015-03-15 - Release 1.3.0
 
 ###Summary
