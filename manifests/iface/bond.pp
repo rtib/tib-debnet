@@ -95,6 +95,14 @@
 # [*routes*] - hash
 #  Feature helper for setting static routes via the interface.
 #
+# [*dns_nameserver*] - array
+#  Feature helper to add a list of nameservers to be configures via resolvconf
+#  while the interface is set up.
+#
+# [*dns_search*] - array
+#  Feature helper to add a list of domain names as dns search via resolvconf
+#  while the interface is set up.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -163,6 +171,8 @@ define debnet::iface::bond(
   # feature-helpers
   $tx_queue = undef,
   $routes = {},
+  $dns_nameservers = undef,
+  $dns_search = undef,
 ) {
   include debnet
 
@@ -171,7 +181,7 @@ define debnet::iface::bond(
       ensure => 'installed',
     }
   }
-  
+
   validate_array($ports)
   if size($ports) == 0 {
     fail('Bonding needs at least one port to be declared!')
@@ -193,14 +203,14 @@ define debnet::iface::bond(
   } else {
     $bondopts1 = {}
   }
-  
+
   if $downdelay {
     validate_re($downdelay, '^\d+$')
     $bondopts2 = {'bond-downdelay' => $downdelay}
   } else {
     $bondopts2 = {}
   }
-  
+
   debnet::iface { $ports:
     method     => 'manual',
     auto       => $auto,
@@ -221,39 +231,40 @@ define debnet::iface::bond(
       }
     ),
     tx_queue   => $tx_queue,
-    routes     => $routes,
   }
 
   debnet::iface { $ifname:
-    method      => $method,
-    auto        => $auto,
-    allows      => $allows,
-    family      => $family,
-    order       => 60 + $order,
-    metric      => $metric,
-    hwaddress   => $hwaddress,
-    hostname    => $hostname,
-    leasetime   => $leasetime,
-    vendor      => $vendor,
-    client      => $client,
-    address     => $address,
-    netmask     => $netmask,
-    broadcast   => $broadcast,
-    gateway     => $gateway,
-    pointopoint => $pointopoint,
-    mtu         => $mtu,
-    scope       => $scope,
-    pre_ups     => $pre_ups,
-    ups         => $ups,
-    downs       => $downs,
-    post_downs  => $post_downs,
-    aux_ops     => merge(
+    method          => $method,
+    auto            => $auto,
+    allows          => $allows,
+    family          => $family,
+    order           => 60 + $order,
+    metric          => $metric,
+    hwaddress       => $hwaddress,
+    hostname        => $hostname,
+    leasetime       => $leasetime,
+    vendor          => $vendor,
+    client          => $client,
+    address         => $address,
+    netmask         => $netmask,
+    broadcast       => $broadcast,
+    gateway         => $gateway,
+    pointopoint     => $pointopoint,
+    mtu             => $mtu,
+    scope           => $scope,
+    pre_ups         => $pre_ups,
+    ups             => $ups,
+    downs           => $downs,
+    post_downs      => $post_downs,
+    aux_ops         => merge(
       $aux_ops_master,
       $bondopts0,
       $bondopts1,
       $bondopts2
     ),
-    tx_queue    => $tx_queue,
-    routes      => $routes,
+    tx_queue        => $tx_queue,
+    routes          => $routes,
+    dns_nameservers => $dns_nameservers,
+    dns_search      => $dns_search,
   }
 }

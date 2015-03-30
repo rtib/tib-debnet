@@ -76,6 +76,14 @@
 # [*routes*] - hash
 #  Feature helper for setting static routes via the interface.
 #
+# [*dns_nameserver*] - array
+#  Feature helper to add a list of nameservers to be configures via resolvconf
+#  while the interface is set up.
+#
+# [*dns_search*] - array
+#  Feature helper to add a list of domain names as dns search via resolvconf
+#  while the interface is set up.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -126,6 +134,8 @@ define debnet::iface::static (
   # feature-helpers
   $tx_queue = undef,
   $routes = {},
+  $dns_nameservers = undef,
+  $dns_search = undef,
 ) {
   include debnet
 
@@ -135,26 +145,29 @@ define debnet::iface::static (
   validate_re($family, '^inet$' )
 
   debnet::iface { $ifname:
-    method      => 'static',
-    auto        => $auto,
-    allows      => $allows,
-    family      => $family,
-    order       => $order,
-    address     => $address,
-    netmask     => $netmask,
-    broadcast   => $broadcast,
-    metric      => $metric,
-    gateway     => $gateway,
-    pointopoint => $pointopoint,
-    hwaddress   => $hwaddress,
-    mtu         => $mtu,
-    scope       => $scope,
-    pre_ups     => $pre_ups,
-    ups         => $ups,
-    downs       => $downs,
-    post_downs  => $post_downs,
-    aux_ops     => $aux_ops,
-    tx_queue    => $tx_queue,
-    routes      => $routes,
+    method          => 'static',
+    auto            => $auto,
+    allows          => $allows,
+    family          => $family,
+    order           => $order,
+    address         => $address,
+    netmask         => $netmask,
+    broadcast       => $broadcast,
+    metric          => $metric,
+    gateway         => $gateway,
+    pointopoint     => $pointopoint,
+    hwaddress       => $hwaddress,
+    mtu             => $mtu,
+    scope           => $scope,
+    pre_ups         => $pre_ups,
+    ups             => $ups,
+    downs           => $downs,
+    post_downs      => $post_downs,
+    aux_ops         => $aux_ops,
+    tx_queue        => $tx_queue,
+    routes          => $routes,
+    dns_nameservers => $dns_nameservers,
+    dns_search      => $dns_search,
+    
   }
 }

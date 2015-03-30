@@ -94,6 +94,14 @@
 # [*routes*] - hash
 #  Feature helper for setting static routes via the interface.
 #
+# [*dns_nameserver*] - array
+#  Feature helper to add a list of nameservers to be configures via resolvconf
+#  while the interface is set up.
+#
+# [*dns_search*] - array
+#  Feature helper to add a list of domain names as dns search via resolvconf
+#  while the interface is set up.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -153,6 +161,8 @@ define debnet::iface (
   # feature-helpers
   $tx_queue = undef,
   $routes = {},
+  $dns_nameservers = undef,
+  $dns_search = undef,
 ) {
   include debnet
   
@@ -171,6 +181,12 @@ define debnet::iface (
   }
   if $routes {
     validate_hash($routes)
+  }
+  if $dns_nameservers {
+    validate_array($dns_nameservers)
+  }
+  if $dns_search {
+    validate_array($dns_search)
   }
 
   case $method {
@@ -192,9 +208,9 @@ define debnet::iface (
       if $leasetime { validate_re($leasetime, '^\d+$') }
       if $vendor { validate_string($vendor) }
       if $client { validate_string($client) }
-      if $hwaddress { validate_re($hwaddress,
-        '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') }
-      
+      if $hwaddress { 
+        validate_re($hwaddress, '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') }
+
       concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
         content => template(
@@ -233,6 +249,7 @@ define debnet::iface (
         order   => 20 + $order,
       }
     }
+
     'manual' : {
       concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
@@ -243,6 +260,7 @@ define debnet::iface (
         order   => 20 + $order,
       }
     }
+
     default: {
       err('unrecognized method')
     }

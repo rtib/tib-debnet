@@ -69,6 +69,14 @@
 # [*routes*] - hash
 #  Feature helper for setting static routes via the interface.
 #
+# [*dns_nameserver*] - array
+#  Feature helper to add a list of nameservers to be configures via resolvconf
+#  while the interface is set up.
+#
+# [*dns_search*] - array
+#  Feature helper to add a list of domain names as dns search via resolvconf
+#  while the interface is set up.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -115,6 +123,8 @@ define debnet::iface::dhcp (
   # feature-helpers
   $tx_queue = undef,
   $routes = {},
+  $dns_nameservers = undef,
+  $dns_search = undef,
 ) {
   include debnet
 
@@ -124,19 +134,21 @@ define debnet::iface::dhcp (
   validate_re($family, '^inet$' )
   
   debnet::iface { $ifname :
-    method     => 'dhcp',
-    hostname   => $hwaddress,
-    metric     => $metric,
-    leasetime  => $leasetime,
-    vendor     => $vendor,
-    client     => $client,
-    hwaddress  => $hwaddress,
-    pre_ups    => $pre_ups,
-    ups        => $ups,
-    downs      => $downs,
-    post_downs => $post_downs,
-    aux_ops    => $aux_ops,
-    tx_queue   => $tx_queue,
-    routes     => $routes,
+    method          => 'dhcp',
+    hostname        => $hwaddress,
+    metric          => $metric,
+    leasetime       => $leasetime,
+    vendor          => $vendor,
+    client          => $client,
+    hwaddress       => $hwaddress,
+    pre_ups         => $pre_ups,
+    ups             => $ups,
+    downs           => $downs,
+    post_downs      => $post_downs,
+    aux_ops         => $aux_ops,
+    tx_queue        => $tx_queue,
+    routes          => $routes,
+    dns_nameservers => $dns_nameservers,
+    dns_search      => $dns_search,
   }
 }
