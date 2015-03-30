@@ -89,6 +89,12 @@
 #  Hash of key-value pairs with auxiliary options for this interface.
 #  To be used by other debnet types only.
 #
+# [*tx_queue*] - int
+#  Feature helper for setting tx queue on the interface.
+#
+# [*routes*] - hash
+#  Feature helper for setting static routes via the interface.
+#
 # === Authors
 #
 # Tibor Repasi
