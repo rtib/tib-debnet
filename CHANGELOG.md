@@ -1,3 +1,8 @@
+##2015-03-30 - Release 1.4.0
+
+##Summary
+New feature helper for configuring DNS nameservers and search via resolvconf.
+
 ##2015-03-16 - Release 1.3.1
 
 ###Summary
