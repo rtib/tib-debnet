@@ -1,3 +1,8 @@
+##2015-03-31 - Release 1.4.2
+
+###Fixes
+- Typo in dns-nameservers fixed
+
 ##2015-03-30 - Release 1.4.1
 
 ##Summary
