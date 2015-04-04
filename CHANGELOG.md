@@ -1,3 +1,8 @@
+##2015-04-04 - Release 1.4.3
+
+##Summary
+CI build testing added.
+
 ##2015-03-31 - Release 1.4.2
 
 ###Fixes
