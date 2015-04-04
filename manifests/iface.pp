@@ -208,7 +208,7 @@ define debnet::iface (
       if $leasetime { validate_re($leasetime, '^\d+$') }
       if $vendor { validate_string($vendor) }
       if $client { validate_string($client) }
-      if $hwaddress { 
+      if $hwaddress {
         validate_re($hwaddress, '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') }
 
       concat::fragment { "${ifname}_stanza":
