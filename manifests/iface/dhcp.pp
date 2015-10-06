@@ -135,6 +135,7 @@ define debnet::iface::dhcp (
   
   debnet::iface { $ifname :
     method          => 'dhcp',
+    auto            => $auto,
     hostname        => $hwaddress,
     metric          => $metric,
     leasetime       => $leasetime,
