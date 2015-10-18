@@ -168,7 +168,7 @@ of the bridge interface. Depending on the method, the mandatory attributes of
 the choosen method are also mandatory for the bridge resource. Optional
 attributes are ports, stp, prio, fwdelay and hello.
 
-An example for configuring a bridge is:
+To simply bridge two devices without bringing them up on layer-3, e.g.:
 ```puppet
 debnet::iface::bridge { 'br0':
   ports  => ['eth1','eth2'],
@@ -177,8 +177,9 @@ debnet::iface::bridge { 'br0':
 }
 ```
 
-The ```debnet::iface::bridge``` resource is defining interfaces for many ports of the
-bridge with manual configuration to inhibit multiple use of the same interface.
+The ```debnet::iface::bridge``` resource is defining interfaces for each port
+of the bridge with manual configuration to inhibit multiple use of the same
+interface.
 
 Available attributes:
 * ```method``` - (string) interface configuration method (mandatory)
@@ -195,10 +196,16 @@ Available attributes:
 The module allows to bond multiple interfaces together by configuring a linux
 bonding device.
 
+The following example will bond devices ```eth1``` and ```eth2``` as
+active-passive slaves of ```bond0```, and will bring up the layer-3 config with
+static address and gateway settings.
 ```puppet
 debnet::iface::bond { 'bond0':
   ports => ['eth1', 'eth2'],
-  method => 'manual',
+  method  => 'static',
+  address => '192.168.0.10',
+  netmask => 24,
+  gateway => '192.168.0.1',
 }
 ```
 Supported bonding modes are: balance-rr, active-backup, balance-xor, broadcast,
