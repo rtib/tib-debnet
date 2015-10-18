@@ -1,3 +1,10 @@
+## 2015-xx-xx - Release ?
+
+##Summary
+
+##Fixes
+- PR/4: Support for bootup configuration on interfaces enabled. (Thanks for the contribution to lbayerlein)
+
 ##2015-04-04 - Release 1.4.3
 
 ##Summary
