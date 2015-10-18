@@ -1,3 +1,25 @@
+## 2015-xx-xx - Release ?
+
+##Summary
+
+##Fixes
+- PR/4: Support for bootup configuration on interfaces enabled. (Thanks for the contribution to lbayerlein)
+
+##2015-04-04 - Release 1.4.3
+
+##Summary
+CI build testing added.
+
+##2015-03-31 - Release 1.4.2
+
+###Fixes
+- Typo in dns-nameservers fixed
+
+##2015-03-30 - Release 1.4.1
+
+##Summary
+New feature helper for configuring DNS nameservers and search via resolvconf.
+
 ##2015-03-16 - Release 1.3.1
 
 ###Summary

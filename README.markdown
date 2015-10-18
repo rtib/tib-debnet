@@ -1,4 +1,5 @@
 # debnet #
+[![Build Status](https://travis-ci.org/rtib/tib-debnet.svg?branch=master)](https://travis-ci.org/rtib/tib-debnet)
 
 ####Table of Contents
 
@@ -19,6 +20,7 @@
 5. [Feature helpers](#feature-helpers)
     * [Queue length](#queue-length)
     * [Static routes](#static-routes)
+    * [DNS resolver settings](#dns-resolver-settings)
 
 ##Overview
 
@@ -280,3 +282,23 @@ debnet::iface::static { 'eth0':
 
 Available attributes:
 * ```routes``` - (hash) maps routes to their gateways (optional)
+
+###DNS resolver settings
+Many Debian installations make use of the resolvconf tools to setup the local
+DNS resolver dynamically. Feature helpers ```dns_nameservers``` and
+```dns_search``` enables to add presets to be passed to resolvconf scripts when
+an interface is brought up.
+
+```puppet
+debnet::iface::static { 'eth0':
+  address         => '192.168.0.10',
+  netmask         => 24,
+  gateway         => '192.168.0.1',
+  dns_search      => ['example.org', 'example.com'],
+  dns_nameservers => ['192.168.0.2', '192.168.0.3'],
+}
+```
+
+Available attributes:
+* ```dns_search``` - (array) DNS search list (optional)
+* ```dns_nameservers``` - (array) DNS nameserver list (optional)

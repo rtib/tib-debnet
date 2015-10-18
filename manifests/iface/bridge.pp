@@ -106,6 +106,20 @@
 #  Hash of key-value pairs with auxiliary options for this interface.
 #  To be used by other debnet types only.
 #
+# [*tx_queue*] - int
+#  Feature helper for setting tx queue on the interface.
+#
+# [*routes*] - hash
+#  Feature helper for setting static routes via the interface.
+#
+# [*dns_nameserver*] - array
+#  Feature helper to add a list of nameservers to be configures via resolvconf
+#  while the interface is set up.
+#
+# [*dns_search*] - array
+#  Feature helper to add a list of domain names as dns search via resolvconf
+#  while the interface is set up.
+#
 # === Authors
 #
 # Tibor Repasi
@@ -174,6 +188,8 @@ define debnet::iface::bridge(
   # feature-helpers
   $tx_queue = undef,
   $routes = {},
+  $dns_nameservers = undef,
+  $dns_search = undef,
 ) {
   include debnet
 
@@ -232,28 +248,28 @@ define debnet::iface::bridge(
     }
   }
   debnet::iface { $ifname:
-    method      => $method,
-    auto        => $auto,
-    allows      => $allows,
-    family      => $family,
-    order       => $order,
-    metric      => $metric,
-    hostname    => $hostname,
-    leasetime   => $leasetime,
-    vendor      => $vendor,
-    client      => $client,
-    address     => $address,
-    netmask     => $netmask,
-    broadcast   => $broadcast,
-    gateway     => $gateway,
-    pointopoint => $pointopoint,
-    mtu         => $mtu,
-    scope       => $scope,
-    pre_ups     => $pre_ups,
-    ups         => $ups,
-    downs       => $downs,
-    post_downs  => $post_downs,
-    aux_ops     => merge(
+    method          => $method,
+    auto            => $auto,
+    allows          => $allows,
+    family          => $family,
+    order           => $order,
+    metric          => $metric,
+    hostname        => $hostname,
+    leasetime       => $leasetime,
+    vendor          => $vendor,
+    client          => $client,
+    address         => $address,
+    netmask         => $netmask,
+    broadcast       => $broadcast,
+    gateway         => $gateway,
+    pointopoint     => $pointopoint,
+    mtu             => $mtu,
+    scope           => $scope,
+    pre_ups         => $pre_ups,
+    ups             => $ups,
+    downs           => $downs,
+    post_downs      => $post_downs,
+    aux_ops         => merge(
       $aux_ops,
       $bropts0,
       $bropts1,
@@ -263,6 +279,8 @@ define debnet::iface::bridge(
       $bropts5,
       $bropts6,
       $bropts7),
-    routes      => $routes,
+    routes          => $routes,
+    dns_nameservers => $dns_nameservers,
+    dns_search      => $dns_search,
   }
 }
