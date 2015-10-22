@@ -47,7 +47,7 @@ class debnet {
     mode           => '0644',
     ensure_newline => true,
   }
-  
+
   concat::fragment { 'interfaces_header':
     target  => $params::interfaces_file,
     content => template('debnet/header.erb'),
