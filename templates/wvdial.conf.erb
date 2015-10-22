@@ -1,0 +1,13 @@
+[Dialer Defaults]
+Modem = <%= @device -%>
+<% @init.each.with_index(1) do |cmd, index| %>
+Init<%= index -%> = <%= cmd -%>
+<% end %>
+Stupid Mode = 1
+New PPPD = yes
+ISDN = 0
+Username = "<%= @username -%>"
+Password = "<%= @password -%>"
+Phone = *99#
+Baud = <%= @baud %>
+Auto DNS = <%= @autodns -%>

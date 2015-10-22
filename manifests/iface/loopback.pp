@@ -19,7 +19,7 @@
 #
 # [*ups*] - array
 #  Array of commands to be run after bringing this interface up.
-#  
+#
 # [*downs*] - array
 #  Array of commands to be run prior to bringing this interface down.
 #
