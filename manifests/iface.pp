@@ -13,6 +13,7 @@
 #   * dhcp
 #   * static
 #   * manual
+#   * wvdial
 #
 # [*auto*] - bool
 #   Sets the interface on automatic setup on startup. This is affected by
@@ -77,7 +78,7 @@
 #
 # [*ups*] - array
 #  Array of commands to be run after bringing this interface up.
-#  
+#
 # [*downs*] - array
 #  Array of commands to be run prior to bringing this interface down.
 #
@@ -165,12 +166,12 @@ define debnet::iface (
   $dns_search = undef,
 ) {
   include debnet
-  
+
   validate_string($ifname)
   validate_bool($auto)
   validate_array($allows)
   validate_re($family, '^inet$' )
-  validate_re($method, '^loopback$|^dhcp$|^static$|^manual$')
+  validate_re($method, '^loopback$|^dhcp$|^static$|^manual$|^wvdial$')
   validate_hash($aux_ops)
   validate_array($pre_ups)
   validate_array($ups)
@@ -255,8 +256,24 @@ define debnet::iface (
         target  => $debnet::params::interfaces_file,
         content => template(
           'debnet/iface_header.erb',
-          'debnet/inet_manual.erb',
+          'debnet/inet_misc.erb',
           'debnet/iface_aux.erb'),
+        order   => 20 + $order,
+      }
+    }
+
+    'wvdial' : {
+      if !defined(Package[$debnet::params::wvdial_pkg]) {
+        package { $debnet::params::wvdial_pkg: ensure => 'installed', }
+      }
+
+      concat::fragment { "${ifname}_stanza":
+        target  => $debnet::params::interfaces_file,
+        content => template(
+          'debnet/iface_header.erb',
+          'debnet/inet_misc.erb',
+          'debnet/iface_aux.erb',
+          'debnet/iface_routes.erb'),
         order   => 20 + $order,
       }
     }

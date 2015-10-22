@@ -95,7 +95,7 @@
 #
 # [*ups*] - array
 #  Array of commands to be run after bringing this interface up.
-#  
+#
 # [*downs*] - array
 #  Array of commands to be run prior to bringing this interface down.
 #
@@ -166,7 +166,7 @@ define debnet::iface::bridge(
   $leasetime = undef,
   $vendor = undef,
   $client = undef,
-  
+
   # options for method static
   $address = undef,
   $netmask = undef,
@@ -198,7 +198,7 @@ define debnet::iface::bridge(
       ensure => 'installed',
     }
   }
-  
+
   if size($ports) > 0 {
     $brports = join($ports, ' ')
     debnet::iface { $ports:
