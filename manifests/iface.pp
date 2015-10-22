@@ -256,18 +256,22 @@ define debnet::iface (
         target  => $debnet::params::interfaces_file,
         content => template(
           'debnet/iface_header.erb',
-          'debnet/inet_manual.erb',
+          'debnet/inet_misc.erb',
           'debnet/iface_aux.erb'),
         order   => 20 + $order,
       }
     }
 
     'wvdial' : {
+      if !defined(Package[$debnet::params::wvdial_pkg]) {
+        package { $debnet::params::wvdial_pkg: ensure => 'installed', }
+      }
+
       concat::fragment { "${ifname}_stanza":
         target  => $debnet::params::interfaces_file,
         content => template(
           'debnet/iface_header.erb',
-          'debnet/inet_wvdial.erb',
+          'debnet/inet_misc.erb',
           'debnet/iface_aux.erb'),
         order   => 20 + $order,
       }
