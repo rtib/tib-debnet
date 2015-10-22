@@ -272,7 +272,8 @@ define debnet::iface (
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_misc.erb',
-          'debnet/iface_aux.erb'),
+          'debnet/iface_aux.erb',
+          'debnet/iface_routes.erb'),
         order   => 20 + $order,
       }
     }
