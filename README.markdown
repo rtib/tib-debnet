@@ -63,6 +63,7 @@ are:
 * static
 * dhcp
 * manual
+* wvdial
 
 ###Configuring the loopback interface
 Currently there is only a single way to create a configuration on the
