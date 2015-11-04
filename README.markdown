@@ -1,5 +1,5 @@
 # debnet #
-[![Build Status](https://travis-ci.org/rtib/tib-debnet.svg?branch=master)](https://travis-ci.org/rtib/tib-debnet)
+[![Build Status](https://travis-ci.org/rtib/tib-debnet.svg?branch=1.5.x)](https://travis-ci.org/rtib/tib-debnet)
 
 ####Table of Contents
 
@@ -21,6 +21,8 @@
     * [Queue length](#queue-length)
     * [Static routes](#static-routes)
     * [DNS resolver settings](#dns-resolver-settings)
+6. [Auxiliary support](#auxiliary-support)
+    * [wvdial](#wvdial)
 
 ##Overview
 
@@ -310,3 +312,7 @@ debnet::iface::static { 'eth0':
 Available attributes:
 * ```dns_search``` - (array) DNS search list (optional)
 * ```dns_nameservers``` - (array) DNS nameserver list (optional)
+
+##Auxiliary support
+###WVDial
+Have a look to ```examples/support/wvdial.pp``` for an example.

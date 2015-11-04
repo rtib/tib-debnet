@@ -1,4 +1,4 @@
-## 2015-xx-xx - Release ?
+## 2015-11-04 - Release 1.5.0
 
 ##Summary
 
