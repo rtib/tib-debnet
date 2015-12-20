@@ -178,7 +178,12 @@ define debnet::iface (
   validate_array($downs)
   validate_array($post_downs)
   if $tx_queue {
-    validate_re($tx_queue, '^\d+$')
+    if is_string($tx_queue) {
+      validate_re($tx_queue, '^\d+$')
+    }
+    else {
+      validate_integer($tx_queue)
+    }
   }
   if $routes {
     validate_hash($routes)
@@ -195,7 +200,7 @@ define debnet::iface (
       concat::fragment { 'lo_stanza':
         target  => $debnet::params::interfaces_file,
         content => template('debnet/loopback.erb'),
-        order   => 10 + $order,
+        order   => 20 + $order,
       }
     }
 
@@ -219,13 +224,18 @@ define debnet::iface (
           'debnet/inet_dhcp.erb',
           'debnet/iface_aux.erb',
           'debnet/iface_routes.erb'),
-        order   => 20 + $order,
+        order   => 30 + $order,
       }
     }
 
     'static' : {
       validate_re($address, '^(:?[0-9]{1,3}\.){3}[0-9]{1,3}$')
-      validate_re($netmask, '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[0-9]{1,2}$')
+      if is_string($netmask) {
+        validate_re($netmask, '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[0-9]{1,2}$')
+      }
+      else {
+        validate_integer($netmask)
+      }
       if $broadcast {
         validate_re($broadcast, '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[+-]$')
       }
@@ -247,7 +257,7 @@ define debnet::iface (
           'debnet/inet_static.erb',
           'debnet/iface_aux.erb',
           'debnet/iface_routes.erb'),
-        order   => 20 + $order,
+        order   => 40 + $order,
       }
     }
 
@@ -258,7 +268,7 @@ define debnet::iface (
           'debnet/iface_header.erb',
           'debnet/inet_misc.erb',
           'debnet/iface_aux.erb'),
-        order   => 20 + $order,
+        order   => 50 + $order,
       }
     }
 
@@ -274,7 +284,7 @@ define debnet::iface (
           'debnet/inet_misc.erb',
           'debnet/iface_aux.erb',
           'debnet/iface_routes.erb'),
-        order   => 20 + $order,
+        order   => 60 + $order,
       }
     }
 

@@ -204,7 +204,7 @@ active-passive slaves of ```bond0```, and will bring up the layer-3 config with
 static address and gateway settings.
 ```puppet
 debnet::iface::bond { 'bond0':
-  ports => ['eth1', 'eth2'],
+  ports   => ['eth1', 'eth2'],
   method  => 'static',
   address => '192.168.0.10',
   netmask => 24,

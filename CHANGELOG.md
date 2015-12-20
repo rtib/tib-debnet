@@ -1,9 +1,11 @@
-## 2015-11-04 - Release 1.5.0
+## 2015-12-19 - Release 1.5.0
 
 ##Summary
 
 ##Fixes
 - PR/4: Support for bootup configuration on interfaces enabled. (Thanks for the contribution to lbayerlein)
+- PR/7: Support for wvdial. (Thanks to tentwentyfour)
+- argument validation improved for Puppet 4 complience
 
 ##2015-04-04 - Release 1.4.3
 
