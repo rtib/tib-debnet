@@ -10,7 +10,8 @@
 #
 # [*device*] - string
 #  Specify which device to use for this config.
-#  Each channel will require a different device, e.g. voice on ACM0, data on ACM1, etc
+#  Each channel will require a different device, e.g. voice on ACM0,
+#  data on ACM1, etc
 #
 # [*baud*] - string
 #

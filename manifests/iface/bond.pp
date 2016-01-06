@@ -186,8 +186,10 @@ define debnet::iface::bond(
   if size($ports) == 0 {
     fail('Bonding needs at least one port to be declared!')
   }
+  # lint:ignore:80chars
   validate_re($mode,
     '^balance\-rr$|^active\-backup$|^balance\-xor$|^broadcast$|^802\.3ad$|^balance\-tlb$|^balance\-alb$')
+  # lint:endignore
   if is_string($miimon) {
     validate_re($miimon, '^\d+$')
   } else {
