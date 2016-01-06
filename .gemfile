@@ -15,13 +15,13 @@ group :system_tests do
   gem 'serverspec',    :require => false
 end
 
-if facterversion = ENV['FACTER_GEM_VERSION']
+if facterversion = ENV['FACTER_VERSION']
   gem 'facter', facterversion, :require => false
 else
   gem 'facter', :require => false
 end
 
-if puppetversion = ENV['PUPPET_GEM_VERSION']
+if puppetversion = ENV['PUPPET_VERSION']
   gem 'puppet', puppetversion, :require => false
 else
   gem 'puppet', :require => false
