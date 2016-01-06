@@ -23,6 +23,9 @@ matrix:
   - rvm: 2.1.8
     env: PUPPET_VERSION="~> 3.0" FUTURE_PARSER="yes"
     gemfile: .gemfile
+  - rvm: 2.0.0
+    env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES="yes"
+    gemfile: .gemfile
   - rvm: 2.1.8
     env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES="yes"
     gemfile: .gemfile
