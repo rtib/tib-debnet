@@ -1,18 +1,13 @@
-require 'rubygems'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
-PuppetLint.configuration.send('disable_80chars')
-PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
 
-desc "Validate manifests, templates and ruby files"
-task :validate do
-  Dir['manifests/**/*.pp'].each do |manifest|
-    sh "puppet parser validate --noop #{manifest}"
-  end
-  Dir['templates/**/*.pp'].each do |template|
-    sh "erb -P -x -T '-' #{template} | ruby -c"
-  end
-  Dir['spec/**/*.rb','lib/**/*.rb'].each do |ruby_file|
-    sh "ruby -c #{ruby_file}" unless ruby_file =~ /spec\/fixtures/
-  end
+# a dirty litle hack around puppetlabs_spec_helper
+exclude_paths = ["test/**/*.pp","vendor/**/*.pp","examples/**/*.pp","spec/**/*.pp","pkg/**/*.pp"]
+
+Rake::Task[:lint].clear
+PuppetLint::RakeTask.new :lint do |config|
+    config.disable_checks = []
+    config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+    config.fail_on_warnings = true
+    config.ignore_paths = exclude_paths
 end
