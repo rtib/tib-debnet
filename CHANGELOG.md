@@ -1,4 +1,25 @@
-## 2015-12-20 - Release 1.5.0
+## 2016-01-07 - Release 1.5.2
+
+##Summary
+Added some tests and bugfixes.
+
+##Fixes
+- debnet::iface::dhcp: bug with hostname feature fixed
+
+##Features
+- syntax validation and lint checks added
+- added some spec tests
+
+## 2015-12-21 - Release 1.5.1
+
+##Summary
+Fixed dependency clash.
+
+##Fixes
+- dependecy to a deleted version of concat
+- inconsistent dependencies to stdlib version
+
+## 2015-12-20 - Release 1.5.0 [Deleted]
 
 ##Summary
 
