@@ -5,6 +5,7 @@ Added some tests and bugfixes.
 
 ##Fixes
 - debnet::iface::dhcp: bug with hostname feature fixed
+- issue#7: validation of metadata.json fixed
 
 ##Features
 - syntax validation and lint checks added
