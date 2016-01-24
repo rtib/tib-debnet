@@ -39,4 +39,22 @@ describe 'debnet::iface::dhcp' do
       })
     }
   end
+
+  context 'eth0 with bad hostname' do
+    let(:params) {{
+      :hostname  => 'test.example.org',
+    }}
+    it {
+      expect { should raise_error(Puppet::Error) }
+    }
+  end
+
+  context 'eth0 with bad hwaddress' do
+    let(:params) {{
+      :hwaddress => '11:22:33:44:55:66:xx',
+    }}
+    it {
+      expect { should raise_error(Puppet::Error) }
+    }
+  end
 end
