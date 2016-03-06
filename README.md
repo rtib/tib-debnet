@@ -30,6 +30,10 @@ This module constructs the ```/etc/network/interfaces``` file on Debian based
 Linux distributions and enables an easy configuration of sophisticated
 network setups, such as bridges and bonding configurations.
 
+##Donate
+If you like this project feel free to support via Bitcoin
+[![donate.png](donate.png)](bitcoin:1GhfvVwTxEQXCok7eECCoAf88LVHPFiAe3?label=donate%3A%20PuppetForge%20debnet%20module)
+
 ##Module Description
 
 This module lets you use many ```debnet::iface``` resourses for setting up
