@@ -3,21 +3,53 @@
   "version": "1.5.2",
   "author": "T. Repasi",
   "summary": "Puppet module to manage /etc/network/interface file on Debian based Linux systems.",
-  "tags": ["network","interfaces","ifup","ifdown","bridge","bonding"],
+  "tags": [
+    "network",
+    "interfaces",
+    "ifup",
+    "ifdown",
+    "bridge",
+    "bonding"
+  ],
   "license": "Apache-2.0",
   "project_page": "https://github.com/rtib/tib-debnet.git",
   "source": "https://github.com/rtib/tib-debnet.git",
-  "issues_url":"https://github.com/rtib/tib-debnet/issues",
+  "issues_url": "https://github.com/rtib/tib-debnet/issues",
   "operatingsystem_support": [
-    {"operatingsystem": "Debian", "operatingsystemrelease": ["6","7","8"] },
-    {"operatingsystem": "Ubuntu", "operatingsystemrelease": ["12.04","14.04"] }
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
+    }
   ],
   "dependencies": [
-    {"name":"puppetlabs/concat","version_requirement":">= 1.2.0 < 3.0.0"},
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.6.0 < 5.0.0"}
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.2.0 < 3.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.6.0 < 5.0.0"
+    }
   ],
   "requirements": [
-    {"name": "pe", "version_requirement": "3.x" },
-    {"name": "puppet", "version_requirement": ">=2.7.0 <5.0.0" }
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">=2.7.0 <5.0.0"
+    }
   ]
 }
