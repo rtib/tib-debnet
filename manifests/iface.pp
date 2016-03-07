@@ -125,11 +125,12 @@
 #
 define debnet::iface (
   $method,
-  $ifname = $title,
+  $ifname = $::title,
   $auto = true,
   $allows = [],
   $family = 'inet',
   $order = 0,
+  $iface_d = undef,
 
   # options for multiple methods
   $metric = undef,
@@ -195,10 +196,37 @@ define debnet::iface (
     validate_array($dns_search)
   }
 
+  if $iface_d {
+    if $::lsbdistid == 'Debian' and $::lsbmajdistrelease < 8 {
+      fail('This feature is not available prior to Debian release 8.')
+    }
+    validate_re($iface_d, '^[a-zA-Z][a-zA-Z0-9_]*$')
+    $cfgtgt = "${debnet::params::interfaces_dir}/${iface_d}"
+  } else {
+    $cfgtgt = $debnet::params::interfaces_file
+  }
+
+  if !defined(Concat[$cfgtgt])
+  {
+    concat { $cfgtgt:
+      owner          => 'root',
+      group          => 'root',
+      mode           => '0644',
+      ensure_newline => true,
+      order          => 'numeric',
+    }
+  
+    concat::fragment { $debnet::params::interfaces_file:
+      target  => $cfgtgt,
+      content => template('debnet/header.erb'),
+      order   => 10,
+    }
+  }
+
   case $method {
     'loopback' : {
       concat::fragment { 'lo_stanza':
-        target  => $debnet::params::interfaces_file,
+        target  => $cfgtgt,
         content => template('debnet/loopback.erb'),
         order   => 20 + $order,
       }
@@ -218,7 +246,7 @@ define debnet::iface (
         validate_re($hwaddress, '^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$') }
 
       concat::fragment { "${ifname}_stanza":
-        target  => $debnet::params::interfaces_file,
+        target  => $cfgtgt,
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_dhcp.erb',
@@ -251,7 +279,7 @@ define debnet::iface (
       if $scope { validate_re($scope, '^global$|^link$|^host$') }
 
       concat::fragment { "${ifname}_stanza":
-        target  => $debnet::params::interfaces_file,
+        target  => $cfgtgt,
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_static.erb',
@@ -263,7 +291,7 @@ define debnet::iface (
 
     'manual' : {
       concat::fragment { "${ifname}_stanza":
-        target  => $debnet::params::interfaces_file,
+        target  => $cfgtgt,
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_misc.erb',
@@ -278,7 +306,7 @@ define debnet::iface (
       }
 
       concat::fragment { "${ifname}_stanza":
-        target  => $debnet::params::interfaces_file,
+        target  => $cfgtgt,
         content => template(
           'debnet/iface_header.erb',
           'debnet/inet_misc.erb',

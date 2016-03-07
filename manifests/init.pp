@@ -37,21 +37,11 @@
 class debnet {
   include debnet::params
 
+  if $::osfamily != 'Debian' {
+    fail('This module supports Debian based Linux distributions only.')
+  }
+
   package { $debnet::params::iproute_pkg:
     ensure => 'installed',
-  }
-
-  concat { $debnet::params::interfaces_file:
-    owner          => 'root',
-    group          => 'root',
-    mode           => '0644',
-    ensure_newline => true,
-    order          => 'numeric',
-  }
-
-  concat::fragment { $debnet::params::interfaces_file:
-    target  => '/etc/network/interfaces',
-    content => template('debnet/header.erb'),
-    order   => 10,
   }
 }
