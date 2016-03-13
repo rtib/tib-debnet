@@ -125,7 +125,7 @@
 #
 define debnet::iface (
   $method,
-  $ifname = $::title,
+  $ifname = $title,
   $auto = true,
   $allows = [],
   $family = 'inet',
@@ -205,6 +205,7 @@ define debnet::iface (
   } else {
     $cfgtgt = $debnet::params::interfaces_file
   }
+  validate_absolute_path($cfgtgt)
 
   if !defined(Concat[$cfgtgt])
   {
@@ -215,7 +216,7 @@ define debnet::iface (
       ensure_newline => true,
       order          => 'numeric',
     }
-  
+
     concat::fragment { $debnet::params::interfaces_file:
       target  => $cfgtgt,
       content => template('debnet/header.erb'),
