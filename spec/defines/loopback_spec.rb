@@ -4,6 +4,7 @@ describe 'debnet::iface::loopback' do
   let(:title) { 'lo' }
   let(:facts) {{
     :concat_basedir => '/var/lib/puppet/concat',
+    :osfamily => 'Debian',
   }}
   
   it {

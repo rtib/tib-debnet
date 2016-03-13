@@ -4,6 +4,7 @@ describe 'debnet::iface::dhcp' do
   let(:title) { 'eth0' }
   let(:facts) {{
     :concat_basedir => '/var/lib/puppet/concat',
+    :osfamily => 'Debian',
   }}
 
   context 'eth0 standard' do
