@@ -1,3 +1,9 @@
+## 2016-03-04 - Release 1.6.0
+
+##Summary
+- feature added to create /etc/interfaces.d/ configurations
+
+
 ## 2016-01-07 - Release 1.5.2
 
 ##Summary
