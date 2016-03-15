@@ -1,5 +1,5 @@
 # debnet #
-[![Build Status](https://travis-ci.org/rtib/tib-debnet.svg?branch=1.5.x)](https://travis-ci.org/rtib/tib-debnet)
+[![Build Status](https://travis-ci.org/rtib/tib-debnet.svg?branch=master)](https://travis-ci.org/rtib/tib-debnet)
 
 ####Table of Contents
 
