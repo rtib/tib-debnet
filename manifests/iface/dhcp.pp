@@ -103,6 +103,7 @@ define debnet::iface::dhcp (
   $allows = [],
   $family = 'inet',
   $order = 0,
+  $iface_d = undef,
 
   $metric = undef,
   $hwaddress = undef,
@@ -136,6 +137,10 @@ define debnet::iface::dhcp (
   debnet::iface { $ifname :
     method          => 'dhcp',
     auto            => $auto,
+    allows          => $allows,
+    family          => $family,
+    order           => $order,
+    iface_d         => $iface_d,
     hostname        => $hostname,
     metric          => $metric,
     leasetime       => $leasetime,

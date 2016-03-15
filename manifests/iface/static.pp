@@ -113,6 +113,7 @@ define debnet::iface::static (
   $allows = [],
   $family = 'inet',
   $order = 0,
+  $iface_d = undef,
 
   $broadcast = undef,
   $metric = undef,
@@ -150,6 +151,7 @@ define debnet::iface::static (
     allows          => $allows,
     family          => $family,
     order           => $order,
+    iface_d         => $iface_d,
     address         => $address,
     netmask         => $netmask,
     broadcast       => $broadcast,
@@ -168,6 +170,5 @@ define debnet::iface::static (
     routes          => $routes,
     dns_nameservers => $dns_nameservers,
     dns_search      => $dns_search,
-
   }
 }

@@ -56,6 +56,7 @@ define debnet::iface::loopback (
   $allows = [],
   $family = 'inet',
   $order = 0,
+  $iface_d = undef,
 
   # up and down commands
   $pre_ups = [],
@@ -77,6 +78,8 @@ define debnet::iface::loopback (
     auto       => $auto,
     allows     => $allows,
     family     => $family,
+    order      => $order,
+    iface_d    => $iface_d,
     pre_ups    => $pre_ups,
     ups        => $ups,
     downs      => $downs,

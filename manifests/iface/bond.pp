@@ -130,6 +130,7 @@ define debnet::iface::bond(
   $allows = [],
   $family = 'inet',
   $order = 0,
+  $iface_d = undef,
 
   # bond options
   $ports = [],
@@ -231,6 +232,7 @@ define debnet::iface::bond(
     allows     => $allows,
     family     => $family,
     order      => 50 + $order,
+    iface_d    => $iface_d,
     mtu        => $mtu,
     pre_ups    => $pre_ups,
     ups        => $ups,
@@ -253,6 +255,7 @@ define debnet::iface::bond(
     allows          => $allows,
     family          => $family,
     order           => 60 + $order,
+    iface_d         => $iface_d,
     metric          => $metric,
     hwaddress       => $hwaddress,
     hostname        => $hostname,
