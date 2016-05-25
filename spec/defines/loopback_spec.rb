@@ -12,5 +12,6 @@ describe 'debnet::iface::loopback' do
       'method' => 'loopback',
       'family' => 'inet',
     })
+    should contain_concat__fragment('lo_stanza')
   }
 end
