@@ -1,25 +1,19 @@
 ---
 language: ruby
 bundler_args: --without system_tests
-script: "bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'"
+script: "bundle exec rake release_checks"
 matrix:
   allow_failures:
   fast_finish: true
-  include:
-  - rvm: 2.1.8
-    env: PUPPET_VERSION="~> 3.0" FUTURE_PARSER="yes"
-    gemfile: .gemfile
-  - rvm: 2.1.8
-    env: PUPPET_VERSION="~> 3.0" STRICT_VARIABLES="yes"
-    gemfile: .gemfile
-  - rvm: 2.2.4
-    env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES="yes"
-    gemfile: .gemfile
-  - rvm: 2.3.0
-    env: PUPPET_VERSION="~> 4.0" STRICT_VARIABLES="yes"
-    gemfile: .gemfile
-  - rvm: 2.3.1
-    env: PUPPET_VERSION="~> 4.5" STRICT_VARIABLES="yes"
-    gemfile: .gemfile
+  rvm:
+    - 2.1.9
+    - 2.2.5
+    - 2.3.1
+  gemfile:
+    - .gemfile
+  env:
+    - PUPPET_VERSION="~> 3.0" FUTURE_PARSER="yes"
+    - PUPPET_VERSION="~> 3.0" STRICT_VARIABLES="yes"
+    - PUPPET_VERSION="~> 4.5" STRICT_VARIABLES="yes"
 notifications:
   email: false

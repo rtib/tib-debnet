@@ -1,22 +1,22 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 if facterversion = ENV['FACTER_VERSION']
-  gem 'facter', facterversion,
+  gem 'facter', facterversion
 else
-  gem 'facter',
+  gem 'facter'
 end
 
 if puppetversion = ENV['PUPPET_VERSION']
-  gem 'puppet', puppetversion,
+  gem 'puppet', puppetversion
 else
-  gem 'puppet',
+  gem 'puppet'
 end
 
-gem 'rake',
-gem 'rspec-puppet',
-gem 'puppetlabs_spec_helper',
-gem 'puppet-lint',
-gem 'puppet_facts',
-gem 'metadata-json-lint',
-gem 'json',
-gem 'puppet-blacksmith',
+gem 'rake'
+gem 'rspec-puppet'
+gem 'puppetlabs_spec_helper'
+gem 'puppet-lint'
+gem 'puppet_facts'
+gem 'metadata-json-lint'
+gem 'json'
+gem 'puppet-blacksmith'
