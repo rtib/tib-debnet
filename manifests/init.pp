@@ -37,7 +37,7 @@
 class debnet {
   include debnet::params
 
-  if $::osfamily != 'Debian' {
+  if $::facts['osfamily'] != 'Debian' {
     fail('This module supports Debian based Linux distributions only.')
   }
 

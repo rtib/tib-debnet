@@ -197,7 +197,8 @@ define debnet::iface (
   }
 
   if $iface_d {
-    if $::lsbdistid == 'Debian' and $::lsbmajdistrelease =~ /!^8.*/ {
+    if $::facts['lsbdistid'] == 'Debian' and
+      $::facts['lsbmajdistrelease'] =~ /!^8.*/ {
       fail('This feature is not available prior to Debian release 8.')
     }
     validate_re($iface_d, '^[a-zA-Z][a-zA-Z0-9_]*$')
