@@ -198,7 +198,7 @@ define debnet::iface::bond(
   }
   $bondopts0 = {
       'bond-slaves'  => 'none',
-      'bond-primary' => $ports[1],
+      'bond-primary' => $ports[0],
       'bond-mode'    => $mode,
       'bond-miimon'  => $miimon,
     }
@@ -243,7 +243,7 @@ define debnet::iface::bond(
       {
         'bond-master'  => $ifname,
         'bond-mode'    => $mode,
-        'bond-primary' => $ports[1],
+        'bond-primary' => $ports[0],
       }
     ),
     tx_queue   => $tx_queue,
