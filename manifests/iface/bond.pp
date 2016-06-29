@@ -254,7 +254,7 @@ define debnet::iface::bond(
     auto            => $auto,
     allows          => $allows,
     family          => $family,
-    order           => 60 + $order,
+    order           => 61 + $order,
     iface_d         => $iface_d,
     metric          => $metric,
     hwaddress       => $hwaddress,
