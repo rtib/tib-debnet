@@ -4,7 +4,7 @@ require 'puppet-lint/tasks/puppet-lint'
 
 Rake::Task[:lint].clear
 PuppetLint::RakeTask.new :lint do |config|
-    config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+    config.log_format = "%{path}:%{line}:%{check}:%{KIND}:%{message}"
     config.fail_on_warnings = true
     config.ignore_paths = [
       "test/**/*.pp",
