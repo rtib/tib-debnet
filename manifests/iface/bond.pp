@@ -196,12 +196,31 @@ define debnet::iface::bond(
   } else {
     validate_integer($miimon)
   }
-  $bondopts0 = {
-      'bond-slaves'  => 'none',
-      'bond-primary' => $ports[1],
-      'bond-mode'    => $mode,
-      'bond-miimon'  => $miimon,
-    }
+
+  if $mode == '802.3ad' {
+    # "bond-primary" is not supported when using 802.3ad bonding
+    $bondopts0 = {
+        'bond-slaves'  => 'none',
+        'bond-mode'    => $mode,
+        'bond-miimon'  => $miimon,
+      }
+    $slave_bondopts = {
+        'bond-master'  => $ifname,
+        'bond-mode'    => $mode,
+      }
+  } else {
+    $bondopts0 = {
+        'bond-slaves'  => 'none',
+        'bond-primary' => $ports[1],
+        'bond-mode'    => $mode,
+        'bond-miimon'  => $miimon,
+      }
+    $slave_bondopts = {
+        'bond-master'  => $ifname,
+        'bond-mode'    => $mode,
+        'bond-primary' => $ports[1],
+      }
+  }
 
   validate_bool($use_carrier)
   if $updelay {
@@ -240,11 +259,7 @@ define debnet::iface::bond(
     post_downs => $post_downs,
     aux_ops    => merge(
       $aux_ops_slaves,
-      {
-        'bond-master'  => $ifname,
-        'bond-mode'    => $mode,
-        'bond-primary' => $ports[1],
-      }
+      $slave_bondopts
     ),
     tx_queue   => $tx_queue,
   }
