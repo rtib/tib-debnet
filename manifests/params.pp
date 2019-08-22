@@ -33,7 +33,7 @@
 class debnet::params {
   $interfaces_file = '/etc/network/interfaces'
   $interfaces_dir = '/etc/network/interfaces.d'
-  $iproute_pkg = 'iproute'
+  $iproute_pkg = 'iproute2'
   $wvdial_pkg = 'wvdial'
   $dhclient_pkg = 'isc-dhcp-client'
   $bridge_utils_pkg = 'bridge-utils'
