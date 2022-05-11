@@ -1,9 +1,15 @@
 # interface <%= @ifname -%> configuration
-<% if @auto == true -%>
-auto <%= @ifname %>
+<% if @allows.index('hotplug') != nil -%>
+allow-hotplug <%= @ifname %>
 <% else -%>
+<%   if @auto == true -%>
+auto <%= @ifname %>
+<%   else -%>
 <%= @ifname %>
+<%   end -%>
 <% end -%>
 <% @allows.each do |s| -%>
+<%   if s != 'hotplug' -%>
 allow-<%= s -%> <%= @ifname %>
+<%   end -%>
 <% end -%>
